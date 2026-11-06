@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: "unifesp-bodypart-benchmark: leakage-controlled benchmark for radiograph body-part classification"
+message: "If you use this code, please cite the manuscript (reference to be added on publication)."
+authors:
+  - family-names: "Abdullah"
+    given-names: "Sheikh Noor"
+    orcid: "https://orcid.org/0009-0002-7193-4284"
+    affiliation: "Department of Information and Communication Engineering, Bangladesh Army University of Engineering & Technology (BAUET), Natore, Bangladesh"
+  - family-names: "Hossain"
+    given-names: "A.B.M. Kabir"
+    affiliation: "Department of Information and Communication Engineering, Bangladesh Army University of Engineering & Technology (BAUET), Natore, Bangladesh"
+license: MIT
+repository-code: "https://github.com/NoorAbdullah02/unifesp-bodypart-benchmark"

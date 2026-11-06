@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv*/
+*.pt
+*.pth
+*.zip
+image_cache/
+runs/*/
+.DS_Store
+# NEVER commit dataset images (MURA: Stanford research agreement forbids redistribution; UNIFESP/COVID/FracAtlas: keep out of the repo)
+*.dcm
+*.png.mura

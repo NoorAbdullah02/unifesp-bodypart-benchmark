@@ -1,0 +1,43 @@
+% Overleaf-ready skeleton generated from MANUSCRIPT_v2.md. Text is a STARTING POINT: rewrite in your own words, add \cite{} keys (see refs.bib), delete the red [VERIFY] tags once checked.
+% Journal templates: Elsevier journals (CMIG, CBM) -> elsarticle.cls (documentclass[review]{elsarticle}); Springer (JIIM) -> sn-jnl.cls. Switch the class and keep the \input lines.
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}\usepackage{graphicx,booktabs,xcolor,hyperref,amsmath,caption,subcaption,float,natbib}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black}
+\graphicspath{{figures/}}
+\title{How reliable are radiograph body-part classifiers? A leakage-controlled, cross-dataset benchmark with reliability and label-quality analysis on public data}
+\author{Sheikh Noor Abdullah$^{1,*}$\thanks{Corresponding author. ORCID: \href{https://orcid.org/0009-0002-7193-4284}{0009-0002-7193-4284}} \and A.B.M. Kabir Hossain$^{1}$\\[4pt]
+{\small $^{1}$Department of Information and Communication Engineering, Bangladesh Army University of Engineering \& Technology (BAUET),\\ Qadirabad Cantonment, Natore, Bangladesh}\\[2pt]
+{\small $^{*}$Corresponding author: \texttt{sheikhnoorabdullah02@gmail.com}; \texttt{kabir111192@gmail.com}}}
+\date{}
+\begin{document}\maketitle
+\begin{abstract}\input{sections/abstract}\end{abstract}
+\noindent\textbf{Keywords:} body-part classification; radiograph; data leakage; reproducibility; calibration; label noise
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/data}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/limitations}
+\input{sections/conclusion}
+\input{sections/declarations}
+\input{sections/declaration_of_generativ}
+\bibliographystyle{plainnat}\bibliography{refs}
+\clearpage\appendix
+\section{Tables}
+\input{tables/t01_main}\input{tables/t02_runs}\input{tables/t03_kaggle}\input{tables/t04_ablation}\input{tables/t05_decoding}\input{tables/t06_gate}
+\input{tables/t07_mura}\input{tables/t08_covid}\input{tables/t09_transfer}\input{tables/t10_explain}\input{tables/t11_stage2}\input{tables/t12_confusions}\input{tables/t13_per_class}\input{tables/t14_label_audit}\input{tables/t15_dataset}
+\section{Figures}
+\begin{figure}[H]\centering\includegraphics[width=\textwidth]{fig1_protocol.pdf}\caption{Leakage-controlled evaluation protocol.}\label{fig:protocol}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=\textwidth]{fig10_heldout_overview.pdf}\caption{Held-out sample-F1 of a frozen-encoder probe, the fine-tuned Swin-T, the best single model and the ensemble; all 95\% CIs overlap.}\label{fig:overview}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=.9\textwidth]{fig2_ablation_forest.pdf}\caption{Ablations: change in held-out sample-F1 versus the reference Swin-T (95\% paired patient-bootstrap CI, p-values on the right).}\label{fig:ablation}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=\textwidth]{fig7_leakage_and_gate.pdf}\caption{(A) Over-estimation caused by a random image-level split and by tuning thresholds on the held-out set. (B) Mean CNN-branch weight of the learned gates versus a fixed average.}\label{fig:leakgate}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=.85\textwidth]{fig3_per_class_recall.pdf}\caption{Per-class held-out recall with patient-bootstrap CIs.}\label{fig:perclass}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=\textwidth]{fig4_reliability.pdf}\caption{(A) Accuracy of answered images versus coverage. (B) OOF-chosen accuracy targets versus achieved held-out accuracy.}\label{fig:reliability}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=\textwidth]{fig5_foundation_models.pdf}\caption{(A) Label efficiency of frozen encoders. (B) Held-out F1 of frozen probes versus fine-tuned models.}\label{fig:fm}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=.9\textwidth]{fig6_transfer.pdf}\caption{Zero-shot transfer through the class map (image-level CIs; optimistic).}\label{fig:transfer}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=.8\textwidth]{fig9_mura.pdf}\caption{MURA body-part accuracy (7 classes) compared with numbers reported by Shah et al.}\label{fig:mura}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=.9\textwidth]{fig8_kaggle.pdf}\caption{Private leaderboard context; ours are late submissions.}\label{fig:kaggle}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=.32\textwidth]{gradcam_gallery_1.png}\hfill\includegraphics[width=.32\textwidth]{gradcam_gallery_2.png}\hfill\includegraphics[width=.32\textwidth]{gradcam_gallery_3.png}\caption{Grad-CAM galleries (ConvNeXt-T, ResNet50, Swin-T in notebook order): per class one correct and one missed held-out image; map for the true class and for the predicted class.}\label{fig:gradcam}\end{figure}
+\end{document}
