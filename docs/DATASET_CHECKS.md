@@ -30,3 +30,6 @@ Consequences: (1) do not put MURA images or MURA Grad-CAM overlays in the paper 
 
 ## UNIFESP authors and provenance (Kaggle Metadata panel, Nov 2026)
 Authors: **Eduardo Moreno Judice de Mattos Farina** (radiology resident, Unifesp), **Nitamar Abdala** (professor/chief of adult radiology, Unifesp), **Felipe Campos Kitamura** (neuroradiologist, Unifesp; head of AI at Dasa). Provenance: de-identified dataset from Universidade Federal de Sao Paulo **under IRB approval**; the Kaggle version is the competition dataset **reduced to 256 x 256**. DOI https://doi.org/10.34740/kaggle/dsv/3399135. (The earlier "[VERIFY author list]" is resolved.)
+
+## MURA mirror vs official index -- hash check done (7 Nov 2026)
+Kaggle notebook (CPU, Accelerator None, 518 s) compared every PNG of `cjinny/mura-v11` with the official Stanford AIMI Redivis `MURA-v1.1` file index (40,009 PNG entries): **40,005 of 40,005 mirror images are identical in path, size and MD5 (first 48 bits)** (train 36,808, valid 3,197); 0 differences, 0 images only in the mirror; the 4 entries only in the official index are `._image*.png` macOS metadata files. Conclusion: the mirror holds the same images as the official release. The check notebook embeds official file names and hashes, so it is NOT published in the repository.
