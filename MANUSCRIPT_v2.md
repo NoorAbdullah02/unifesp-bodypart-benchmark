@@ -2,7 +2,7 @@
 
 Status legend: **[VERIFY]** = open the cited source and check before submission; every number is copied from `results/paper_tables.md`, `results/reliability/`, `results/stage2/`, `results/fm/` or the Kaggle leaderboard page. Nothing here claims "best" or "state of the art".
 
-**Working title:** *How reliable are radiograph body-part classifiers? A leakage-controlled, cross-dataset benchmark with reliability and label-quality analysis on public data*
+**Working title:** *Leakage-controlled benchmarking of radiograph body-part classification: reliability, label audit, explainability and cross-dataset transfer on public data*
 
 ---
 ## Abstract

@@ -1,6 +1,6 @@
 # Title page (fill in)
-**Title:** How reliable are radiograph body-part classifiers? A leakage-controlled, cross-dataset benchmark with reliability and label-quality analysis on public data
-**Short title:** Reliable radiograph body-part classification
+**Title:** Leakage-controlled benchmarking of radiograph body-part classification: reliability, label audit, explainability and cross-dataset transfer on public data
+**Short title:** Benchmarking radiograph body-part classification
 **Authors (first author first):** Sheikh Noor Abdullah (sheikhnoorabdullah02@gmail.com; first author; ORCID 0009-0002-7193-4284); A.B.M. Kabir Hossain
 **Affiliation (both):** Department of Information and Communication Engineering, Bangladesh Army University of Engineering & Technology (BAUET), Qadirabad Cantonment, Natore, Bangladesh
 **Corresponding author:** Sheikh Noor Abdullah (sheikhnoorabdullah02@gmail.com); second author and supervisor: A.B.M. Kabir Hossain; **ORCID:** S.N. Abdullah 0009-0002-7193-4284 (given by the first author); A.B.M. Kabir Hossain [TO ADD]

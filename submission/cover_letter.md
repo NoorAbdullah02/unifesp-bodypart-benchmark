@@ -4,7 +4,7 @@
 
 Dear Editor-in-Chief [name] and members of the editorial board of Computerized Medical Imaging and Graphics,
 
-We submit the manuscript "How reliable are radiograph body-part classifiers? A leakage-controlled, cross-dataset benchmark with reliability and label-quality analysis on public data" for consideration as an original research article in Computerized Medical Imaging and Graphics.
+We submit the manuscript "Leakage-controlled benchmarking of radiograph body-part classification: reliability, label audit, explainability and cross-dataset transfer on public data" for consideration as an original research article in Computerized Medical Imaging and Graphics.
 
 **What the paper does.** Knowing which part of the body a radiograph shows is a routine need in PACS routing and cohort building, yet published accuracies are hard to compare. Splits, thresholds and uncertainty are rarely reported in enough detail, and most large studies use private data. We use only public data. On the UNIFESP body-part dataset (22 classes, 1,738 labelled radiographs) we split by patient, keep a held-out set apart, make every choice on out-of-fold predictions and report patient-level bootstrap intervals.
 

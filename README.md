@@ -1,6 +1,6 @@
-# How reliable are radiograph body-part classifiers?
+# Leakage-controlled benchmarking of radiograph body-part classification
 
-**A leakage-controlled, cross-dataset benchmark with reliability and label-quality analysis on public data.**
+**Reliability, label audit, explainability and cross-dataset transfer on public data.**
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24027438.svg)](https://doi.org/10.5281/zenodo.24027438)
 ![License: MIT](https://img.shields.io/badge/code-MIT-green)

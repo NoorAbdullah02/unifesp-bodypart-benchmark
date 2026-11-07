@@ -20,7 +20,7 @@ def runs(p, text):
 # ---- split the manuscript: body (up to Figures) and figure list
 body, _, figs = md.partition("## Figures (files in")
 body = body.split("\n---\n", 1)[1] if "\n---\n" in body else body       # drop the working-status header
-title = "How reliable are radiograph body-part classifiers? A leakage-controlled, cross-dataset benchmark with reliability and label-quality analysis on public data"
+title = "Leakage-controlled benchmarking of radiograph body-part classification: reliability, label audit, explainability and cross-dataset transfer on public data"
 h = doc.add_heading(title, 0); h.alignment = WD_ALIGN_PARAGRAPH.LEFT
 p = doc.add_paragraph(); r = p.add_run("Sheikh Noor Abdullah"); r.bold = True; p.add_run("1,*, ")
 r = p.add_run("A.B.M. Kabir Hossain"); r.bold = True; p.add_run("1")
