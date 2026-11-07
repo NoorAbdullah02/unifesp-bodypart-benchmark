@@ -94,14 +94,14 @@ for p in parts:
         if s.startswith("[[FIG|"):
             _, num, fn, cap = s.strip("[]").split("|", 3)
             W = {"fig1_protocol": 0.95, "fig10_heldout_overview": 0.55, "fig8_kaggle": 0.62, "r4_stage2": 0.42, "fig7_leakage_and_gate": 0.88, "fig2_ablation_forest": 0.6,
-                 "fig5_foundation_models": 0.88, "fig4_reliability": 0.88, "r2_f1_vs_npos": 0.5, "fig3_per_class_recall": 0.52, "r3_label_audit": 0.5, "r5_confusions": 0.55,
+                 "fig5_foundation_models": 0.88, "m1_architecture": 0.95, "fig4_reliability": 0.88, "r2_f1_vs_npos": 0.5, "fig3_per_class_recall": 0.52, "r3_label_audit": 0.5, "r5_confusions": 0.55,
                  "fig9_mura": 0.6, "fig6_transfer": 0.62, "d1_examples": 0.8, "d2_classes_labels": 0.9, "d3_label_pairs": 0.5, "d4_split_composition": 0.55}
             files = fn.split(";")
             if len(files) > 1:
                 body = "\\hfill".join("\\includegraphics[width=0.32\\textwidth]{%s}" % f for f in files)
             else:
                 body = "\\includegraphics[width=%s\\textwidth]{%s}" % (W.get(fn.rsplit(".", 1)[0], 0.7), fn)
-            out.append("\\begin{figure}[htbp]\\centering%s\\caption{%s}\\label{fig:%s}\\end{figure}" % (body, tex(cap), num)); continue
+            out.append("\\begin{figure}[H]\\centering%s\\caption{%s}\\label{fig:%s}\\end{figure}" % (body, tex(cap), num)); continue
         if s.startswith("### "): out.append("\\subsection{%s}" % tex(re.sub(r"^\d+\.\d+\s*", "", s[4:]))); continue
         if s.startswith("* ") or re.match(r"^\d+\. ", s):
             out.append("\\begin{itemize}\\item " + tex(re.sub(r"^(\* |\d+\. )", "", s)) + "\\end{itemize}"); continue

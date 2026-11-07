@@ -72,3 +72,23 @@ fig, ax = plt.subplots(figsize=(6.6, 4.0)); h = 0.26; y = np.arange(len(pv))
 for k, (m, c, n) in enumerate((("convnext_tiny_s256", NAVY, "ConvNeXt-T"), ("resnet50_s256_heavy", AMBER, "ResNet50"), ("swin_tiny_s224", TEAL, "Swin-T"))): ax.barh(y + (k - 1) * h, pv[m], h, color=c, label=n)
 ax.set_yticks(y); ax.set_yticklabels(pv.index, fontsize=9); ax.grid(axis="y", visible=False); ax.set_xlabel("Missed held-out images"); ax.legend(frameon=False, fontsize=8.5, loc="lower right")
 ax.set_title("The same confusions appear in all three models", loc="left", fontsize=10); save(fig, "r5_confusions")
+
+# M1: model and decision pipeline
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+fig, ax = plt.subplots(figsize=(11, 4.6)); ax.axis("off"); ax.set_xlim(0, 110); ax.set_ylim(0, 52); ax.grid(False)
+def box(x, y, w, h, t, fc, tc="white", fs=8.4, bold=False):
+    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.35,rounding_size=1.2", fc=fc, ec=fc)); ax.text(x + w / 2, y + h / 2, t, ha="center", va="center", fontsize=fs, color=tc, fontweight="bold" if bold else "normal", linespacing=1.3)
+def arr(x1, y1, x2, y2): ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), arrowstyle="-|>", mutation_scale=11, lw=1.4, color=GREY))
+box(1, 19, 15, 12, "Radiograph\n256 px DICOM\npolarity fixed,\nscaled to 8 bit", NAVY, bold=True, fs=8)
+arr(16.8, 25, 20.2, 25)
+box(21, 19, 15, 12, "Light augmentation\nflip, shift-scale-rotate,\nbrightness/contrast", "#E5E7EB", tc=INK)
+arr(36.8, 25, 41.2, 25)
+names_b = ["Swin-T", "DenseNet121", "EfficientNetV2-S", "ConvNeXt-T", "ResNet50", "EfficientNet-B3"]
+for i, n in enumerate(names_b): box(42, 41 - i * 6.6, 17, 5, n, TEAL, fs=8)
+ax.text(50.5, 49.2, "6 ImageNet-pretrained backbones", ha="center", fontsize=8.6, fontweight="bold", color=INK)
+arr(59.8, 25, 64.2, 25)
+box(65, 26.5, 15, 6.5, "Sigmoid head\n22 labels (BCE)", AMBER, tc=INK); box(65, 17, 15, 6.5, "Softmax head\n22 classes (soft CE)", AMBER, tc=INK)
+arr(80.8, 25, 85.2, 25)
+box(86, 16, 22, 18, "Decisions on OOF only\nblend of heads, TTA flip\nCaruana ensemble weights\nper-class thresholds\nat least one label", CORAL, fs=8, bold=True)
+ax.text(55, 0.8, "Five-fold patient-level training; the held-out set is scored once. EMA weights, no checkpoint selection.", ha="center", fontsize=8.8, color=GREY)
+save(fig, "m1_architecture")
