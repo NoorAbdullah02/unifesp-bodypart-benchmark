@@ -41,8 +41,8 @@ On MURA, Shah et al. (2026) classified the seven upper-extremity study types wit
 [[FIG|classes|d2_classes_labels.png|(A) Training images per class, on a log scale. (B) Number of labels per image.]]
 
 
-**Splits.** We split by patient with multilabel stratification (iterative stratification, seed 42). That gave a fixed held-out set of 323 images from 156 patients and a cross-validation pool of 1,415 images from 612 patients in five folds. The held-out set has only 1 to 3 positives for Clavicles (1), Skull (2), Forearm (3), Elbow (3) and Thigh (3), so per-class numbers for these classes are unstable. Fig. {{pairs}} shows the label combinations (top) and that both parts of the data cover every class.
-[[FIG|pairs|c1_pairs_split.png|(Top) The ten most frequent label pairs; two pairs, Lumbar with Thoracic Spine and Hand with Wrist, account for most multilabel images. (Bottom) Images per class in the cross-validation pool and in the held-out set, on a log scale.]]
+**Splits.** We split by patient with multilabel stratification (iterative stratification, seed 42). That gave a fixed held-out set of 323 images from 156 patients and a cross-validation pool of 1,415 images from 612 patients in five folds. The held-out set has only 1 to 3 positives for Clavicles (1), Skull (2), Forearm (3), Elbow (3) and Thigh (3), so per-class numbers for these classes are unstable. Fig. {{pairs}} shows the label combinations (A) and that both parts of the data cover every class.
+[[FIG|pairs|c1_pairs_split.png|(A) The ten most frequent label pairs; two pairs, Lumbar with Thoracic Spine and Hand with Wrist, account for most multilabel images. (B) Images per class in the cross-validation pool and in the held-out set, on a log scale.]]
 
 
 **Other datasets.** For **MURA** (Rajpurkar et al. 2018) we took the body part from the `XR_*` folder name (7 classes) and used the official train/validation split. **FracAtlas** (Abedeen et al., Sci Data 2023, CC BY 4.0) has 4,083 images from three hospitals in Bangladesh, annotated by two radiologists and an orthopaedist; we used the 3,685 with a single region (hand, hip, leg or shoulder) for zero-shot transfer. **COVID-19 Radiography** (Chowdhury et al. 2020) has 4 classes and no patient identifiers, so its split is image-level.
@@ -111,21 +111,21 @@ A linear probe on frozen DINOv2-S reached 0.8699 OOF and 0.8859 on the held-out 
 
 
 
-[[FIG|audit|c2_audit_confusions.png|(Top) The pairs of given and suggested labels among the 39 suspected label errors. (Bottom) The most frequent misclassifications of the three explained models on the held-out set.]]
+[[FIG|audit|c2_audit_confusions.png|(A) The pairs of given and suggested labels among the 39 suspected label errors. (B) The most frequent misclassifications of the three explained models on the held-out set.]]
 **Label audit.** At p of 0.9 or more, 39 of 1,415 training images (2.8 %) were flagged. The most frequent pairs were Hip to Pelvis (5), Wrist to Ankle (4) and Others to Chest (3). The Hip-to-Pelvis pattern mirrors the low Hip recall, which fits either label noise or a real boundary problem between the two classes. No clinician has reviewed any of the 39 suspects.
 
-**Error analysis (Table 12).** In the three explained fold-0 models the most frequent held-out misses were Others labelled as Abdomen (6 to 8 images per model) and Others labelled as Pelvis (4 to 5), followed by Hip as Pelvis (2 per model) and Forearm as Lower Leg (2 per model). The heterogeneous "Others" class is mostly absorbed by large body regions. Fig. {{audit}} shows which label pairs the suspects fall into (top) and how the three explained models misclassify the held-out images (bottom).
+**Error analysis (Table 12).** In the three explained fold-0 models the most frequent held-out misses were Others labelled as Abdomen (6 to 8 images per model) and Others labelled as Pelvis (4 to 5), followed by Hip as Pelvis (2 per model) and Forearm as Lower Leg (2 per model). The heterogeneous "Others" class is mostly absorbed by large body regions. Fig. {{audit}} shows which label pairs the suspects fall into (A) and how the three explained models misclassify the held-out images (B).
 
 
 ### 5.8 Generalisation (Tables 7 and 9; Supplementary Table 8)
 On the official MURA split the five-fold bagged ensemble reached an accuracy of 0.9747 [0.9663, 0.9818] and a macro-F1 of 0.9707 [0.9616, 0.9788]. Shah et al. (2026) report 0.9643 and 0.9574 on the same 3,197-image validation set, so the two results are comparable in data but not in method details.
  On COVID-19 Radiography (4 classes, image-level split) sample-F1 was 0.9647 [0.9595, 0.9697] and macro-F1 0.9681, and these numbers may be optimistic.
-Zero-shot transfer (Table 9) gave 0.875 to 0.880 from MURA to UNIFESP (n = 184) and 0.813 to 0.821 from UNIFESP to MURA (n = 12,000). From MURA to FracAtlas, restricted to hand and shoulder (1,281 of the 1,382 images are hand), accuracy was 0.691 with the softmax head and 0.858 with the sigmoid head. From UNIFESP to FracAtlas (hand, hip, leg, shoulder; n = 3,685) it was 0.708 and 0.698. Many FracAtlas JPEGs are truncated and were decoded only partly. Fig. {{mura}} summarises the MURA comparison (top) and the transfer results (bottom).
+Zero-shot transfer (Table 9) gave 0.875 to 0.880 from MURA to UNIFESP (n = 184) and 0.813 to 0.821 from UNIFESP to MURA (n = 12,000). From MURA to FracAtlas, restricted to hand and shoulder (1,281 of the 1,382 images are hand), accuracy was 0.691 with the softmax head and 0.858 with the sigmoid head. From UNIFESP to FracAtlas (hand, hip, leg, shoulder; n = 3,685) it was 0.708 and 0.698. Many FracAtlas JPEGs are truncated and were decoded only partly. Fig. {{mura}} summarises the MURA comparison (A) and the transfer results (B).
 [[TAB|t07_mura]]
 
 [[TAB|t09_transfer]]
 
-[[FIG|mura|c3_mura_transfer.png|(Top) Body-part accuracy on MURA (seven classes), compared with the models reported by Shah et al. (2026). (Bottom) Zero-shot accuracy through the class map, for the softmax and sigmoid heads; intervals come from an image-level bootstrap and are optimistic.]]
+[[FIG|mura|c3_mura_transfer.png|(A) Body-part accuracy on MURA (seven classes), compared with the models reported by Shah et al. (2026). (B) Zero-shot accuracy through the class map, for the softmax and sigmoid heads; intervals come from an image-level bootstrap and are optimistic.]]
  Transfer is moderate and depends on the head, and the class maps are assumptions.
 
 ### 5.9 Explainability (Table 10)
