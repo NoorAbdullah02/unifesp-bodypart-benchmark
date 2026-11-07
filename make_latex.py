@@ -76,7 +76,7 @@ rows = [["property", "value"], ["images / patients (train)", "1,738 / 768"], ["t
         ["BodyPartExamined tag", "empty in all 2,481 files"], ["annotators", "radiology residents (four named in the dataset page), MD.ai platform; number of readers per image not stated"], ["licence", "CC BY-NC-SA 4.0"], ["held-out set", "323 images / 156 patients"], ["CV pool", "1,415 images / 612 patients, 5 folds"]]
 open(f"{L}/tables/t15_dataset.tex", "w", encoding="utf-8").write(to_tex("Table 15. UNIFESP dataset and split summary", rows, "From the dataset page and our own analysis (results/eda).", "tab:dataset", fit=False))
 # ------------------------------------------------------------------ figures
-for f in glob.glob("figures/*.pdf"): shutil.copy(f, f"{L}/figures/")
+for f in glob.glob("figures/*.png"): shutil.copy(f, f"{L}/figures/")
 for f in glob.glob("figures/gradcam_gallery_*.png"): shutil.copy(f, f"{L}/figures/")
 # ------------------------------------------------------------------ sections
 md = open("MANUSCRIPT_v2.md", encoding="utf-8").read(); md = md.split("\n---\n", 1)[1]; md = md.split("## Figures (files in")[0]
@@ -92,7 +92,7 @@ for p in parts:
         if not s.strip() or s.strip() == "---": out.append(""); continue
         if s.startswith("[[FIG|"):
             _, num, fn, cap = s.strip("[]").split("|", 3)
-            w = "0.55" if fn.endswith(".png") else "0.95"
+            w = "0.55" if "gradcam" in fn else "0.95"
             out.append("\\begin{figure}[htbp]\\centering\\includegraphics[width=%s\\textwidth]{%s}\\caption{%s}\\label{fig:%s}\\end{figure}" % (w, fn, tex(cap), num)); continue
         if s.startswith("### "): out.append("\\subsection{%s}" % tex(re.sub(r"^\d+\.\d+\s*", "", s[4:]))); continue
         if s.startswith("* ") or re.match(r"^\d+\. ", s):
