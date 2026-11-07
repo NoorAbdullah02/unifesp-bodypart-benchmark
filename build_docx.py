@@ -25,6 +25,13 @@ p = doc.add_paragraph(); r = p.add_run("[Author names, affiliations, correspondi
 for line in body.split("\n"):
     line = line.rstrip()
     if not line.strip() or line.strip() == "---": continue
+    if line.startswith("[[FIG|"):
+        _, num, fn, cap = line.strip("[]").split("|", 3)
+        png = "figures/" + fn.replace(".pdf", ".png")
+        if os.path.exists(png):
+            doc.add_picture(png, width=Inches(3.6 if fn.endswith("1.png") or "gradcam" in fn else 6.0)); doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+            q = doc.add_paragraph(); rr = q.add_run("Fig. %s. " % num); rr.bold = True; q.add_run(cap)
+        continue
     if line.startswith("## "): doc.add_heading(re.sub(r"^## \d* ?", "", line) if False else line[3:], 1)
     elif line.startswith("### "): doc.add_heading(line[4:], 2)
     elif re.match(r"^\* ", line): runs(doc.add_paragraph(style="List Bullet"), line[2:])
@@ -44,21 +51,4 @@ for block in re.split(r"\n(?=## Table )", tables_md):
     for l in lines:
         if l.startswith("_") and l.endswith("_"): q = doc.add_paragraph(); rr = q.add_run(l.strip("_")); rr.italic = True; rr.font.size = Pt(8)
     doc.add_paragraph()
-# ---- figures
-doc.add_page_break(); doc.add_heading("Figures", 1)
-caps = {}
-for l in figs.split("\n"):
-    m = re.match(r"\* \*\*(Fig\. [\d-]+)\*\* `([^`]+)`: (.*)", l)
-    if m: caps[m[2]] = (m[1], m[3])
-order = ["fig1_protocol", "fig10_heldout_overview", "fig2_ablation_forest", "fig7_leakage_and_gate", "fig3_per_class_recall", "fig4_reliability", "fig5_foundation_models", "fig6_transfer", "fig9_mura", "fig8_kaggle"]
-for k in order:
-    f = f"figures/{k}.png"
-    if os.path.exists(f) and k in caps:
-        doc.add_picture(f, width=Inches(6.2)); doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
-        q = doc.add_paragraph(); rr = q.add_run(caps[k][0] + ". "); rr.bold = True; runs(q, re.sub(r"`", "", caps[k][1]))
-for i in (1, 2, 3):
-    f = f"figures/gradcam_gallery_{i}.png"
-    if os.path.exists(f):
-        doc.add_picture(f, width=Inches(3.4)); doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
-        q = doc.add_paragraph(); rr = q.add_run(f"Fig. {10 + i}. "); rr.bold = True; q.add_run(["ConvNeXt-T", "ResNet50", "Swin-T"][i - 1] + ": Grad-CAM gallery (per class one correct and one missed held-out image; map for the true class and for the predicted class). Model order inferred from the notebook output listing.")
 doc.save("submission/manuscript.docx"); print("wrote submission/manuscript.docx")

@@ -90,6 +90,10 @@ for p in parts:
     for line in body.split("\n"):
         s = line.rstrip()
         if not s.strip() or s.strip() == "---": out.append(""); continue
+        if s.startswith("[[FIG|"):
+            _, num, fn, cap = s.strip("[]").split("|", 3)
+            w = "0.55" if fn.endswith(".png") else "0.95"
+            out.append("\\begin{figure}[htbp]\\centering\\includegraphics[width=%s\\textwidth]{%s}\\caption{%s}\\label{fig:%s}\\end{figure}" % (w, fn, tex(cap), num)); continue
         if s.startswith("### "): out.append("\\subsection{%s}" % tex(re.sub(r"^\d+\.\d+\s*", "", s[4:]))); continue
         if s.startswith("* ") or re.match(r"^\d+\. ", s):
             out.append("\\begin{itemize}\\item " + tex(re.sub(r"^(\* |\d+\. )", "", s)) + "\\end{itemize}"); continue
