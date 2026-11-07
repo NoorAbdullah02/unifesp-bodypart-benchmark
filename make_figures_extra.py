@@ -92,3 +92,16 @@ arr(80.8, 25, 85.2, 25)
 box(86, 16, 22, 18, "Decisions on OOF only\nblend of heads, TTA flip\nCaruana ensemble weights\nper-class thresholds\nat least one label", CORAL, fs=8, bold=True)
 ax.text(55, 0.8, "Five-fold patient-level training; the held-out set is scored once. EMA weights, no checkpoint selection.", ha="center", fontsize=8.8, color=GREY)
 save(fig, "m1_architecture")
+
+# Combined figures (one figure per page in the manuscript)
+from PIL import Image
+def combine(files, out, widths=None):
+    ims = [Image.open(f"{O}/{f}").convert("RGB") for f in files]
+    W = max(i.width for i in ims); ims = [i.resize((W, int(i.height * W / i.width)), Image.LANCZOS) for i in ims]
+    H = sum(i.height for i in ims) + 60 * (len(ims) - 1); S = Image.new("RGB", (W, H), "white"); y = 0
+    for i in ims: S.paste(i, (0, y)); y += i.height + 60
+    S.save(f"{O}/{out}", dpi=(300, 300)); print("wrote", out)
+combine(["d3_label_pairs.png", "d4_split_composition.png"], "c1_pairs_split.png")
+combine(["r3_label_audit.png", "r5_confusions.png"], "c2_audit_confusions.png")
+combine(["fig9_mura.png", "fig6_transfer.png"], "c3_mura_transfer.png")
+combine(["fig8_kaggle.png", "r4_stage2.png"], "c4_kaggle_stage2.png")
