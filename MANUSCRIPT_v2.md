@@ -115,12 +115,10 @@ Zero-shot transfer (Table 9) gave 0.875 to 0.880 from MURA to UNIFESP (n = 184) 
 [[FIG|transfer|fig6_transfer.png|Zero-shot accuracy through the class map, for the softmax and sigmoid heads. Intervals come from an image-level bootstrap and are optimistic.]]
 
 ### 5.9 Explainability (Table 10)
-For all three models, deleting the most salient pixels first removed class evidence faster than deleting a random block of the same size (gain 0.284 [0.252, 0.316] for ConvNeXt-T, 0.204 for ResNet50, 0.164 for Swin-T). The maps were uncorrelated with those of randomly initialised networks for ConvNeXt-T and Swin-T (rho 0.11 and 0.02). ResNet50 differed too, but with a systematic negative correlation (rho -0.31). The feature grids are coarse (7 x 7 to 8 x 8), there is no localisation ground truth and no radiologist reviewed the maps. We therefore describe them as faithful to the model, not as clinically valid (Figs. {{g1}} to {{g3}}).
-[[FIG|g1|gradcam_gallery_1.png|Grad-CAM gallery for ConvNeXt-T. For each class there is one correct and one missed held-out image, with the map for the true class and for the predicted class.]]
+For all three models, deleting the most salient pixels first removed class evidence faster than deleting a random block of the same size (gain 0.284 [0.252, 0.316] for ConvNeXt-T, 0.204 for ResNet50, 0.164 for Swin-T). The maps were uncorrelated with those of randomly initialised networks for ConvNeXt-T and Swin-T (rho 0.11 and 0.02). ResNet50 differed too, but with a systematic negative correlation (rho -0.31). The feature grids are coarse (7 x 7 to 8 x 8), there is no localisation ground truth and no radiologist reviewed the maps. We therefore describe them as faithful to the model, not as clinically valid (Fig. {{gradcam}}).
+[[FIG|gradcam|gradcam_gallery_1.png;gradcam_gallery_2.png;gradcam_gallery_3.png|Grad-CAM galleries for ConvNeXt-T (left), ResNet50 (middle) and Swin-T (right). For each class there is one correct and one missed held-out image, with the map for the true class and for the predicted class.]]
 
-[[FIG|g2|gradcam_gallery_2.png|Grad-CAM gallery for ResNet50, laid out as in Fig. {{g1}}.]]
 
-[[FIG|g3|gradcam_gallery_3.png|Grad-CAM gallery for Swin-T, laid out as in Fig. {{g1}}.]]
 
 
 ## 6 Discussion

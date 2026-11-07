@@ -28,10 +28,11 @@ for line in body.split("\n"):
     if not line.strip() or line.strip() == "---": continue
     if line.startswith("[[FIG|"):
         _, num, fn, cap = line.strip("[]").split("|", 3)
-        png = "figures/" + fn.replace(".pdf", ".png")
-        if os.path.exists(png):
-            doc.add_picture(png, width=Inches(3.6 if "gradcam" in fn else 6.0)); doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
-            q = doc.add_paragraph(); rr = q.add_run("Fig. %s. " % num); rr.bold = True; q.add_run(cap)
+        files = fn.split(";"); p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        for f in files:
+            png = "figures/" + f
+            if os.path.exists(png): p.add_run().add_picture(png, width=Inches(2.0 if len(files) > 1 else 5.2))
+        q = doc.add_paragraph(); rr = q.add_run("Fig. %s. " % num); rr.bold = True; q.add_run(cap)
         continue
     if line.startswith("## "): doc.add_heading(re.sub(r"^## \d* ?", "", line) if False else line[3:], 1)
     elif line.startswith("### "): doc.add_heading(line[4:], 2)

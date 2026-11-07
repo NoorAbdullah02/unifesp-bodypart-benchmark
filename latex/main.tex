@@ -1,9 +1,15 @@
 % Elsevier (elsarticle) version for Computerized Medical Imaging and Graphics. Compile on Overleaf (elsarticle is preinstalled there).
 % Upload the whole folder; refs.bib, sections/, tables/, figures/ must sit next to this file. Supplementary tables are in supplementary.tex.
-\documentclass[review]{elsarticle}
+\documentclass[preprint,12pt]{elsarticle}
 \usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}
-\usepackage{graphicx,booktabs,xcolor,hyperref,amsmath,float,caption}
+\usepackage{graphicx,booktabs,xcolor,amsmath,float,caption}
+\usepackage[hyphens]{xurl}
+\usepackage[breaklinks=true]{hyperref}
+\setcounter{totalnumber}{1}\setcounter{topnumber}{1}\setcounter{bottomnumber}{1}
+\emergencystretch=3em\tolerance=1500\hbadness=5000
 \graphicspath{{figures/}}
+\renewcommand{\topfraction}{0.92}\renewcommand{\bottomfraction}{0.92}\renewcommand{\textfraction}{0.08}\renewcommand{\floatpagefraction}{0.75}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}\setlength{\intextsep}{10pt plus 2pt minus 2pt}\setlength{\floatsep}{8pt plus 2pt minus 2pt}\setlength{\parskip}{2pt}
 \journal{Computerized Medical Imaging and Graphics}
 \begin{document}
 \begin{frontmatter}
