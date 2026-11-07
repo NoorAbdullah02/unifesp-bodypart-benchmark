@@ -110,7 +110,7 @@ def build(root):
     d["_s"] = d["private_score"].astype(float); d = d.sort_values("_s", ascending=False).drop(columns="_s")
     add("Table 3. Kaggle UNIFESP private score vs. the competition leaderboard",
         d, "Mean F1 (sample-wise); private score uses ~60 % of the test set with the original (partly noisy) labels, so differences of ~0.003 are within noise. "
-           "Late submissions are not listed on the leaderboard; report ALL submissions made.")
+           "Late submissions are not listed on the leaderboard; we report every submission we made.")
 
     # 4-6 ablation --------------------------------------------------------------------------------
     ab = root if os.path.exists(os.path.join(root, "ablation_configs.csv")) else os.path.join(root, "results_ablation")

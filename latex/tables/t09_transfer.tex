@@ -1,10 +1,10 @@
 \setcounter{table}{5}
 \Needspace*{9\baselineskip}
-\begin{center}\small
+\begin{center}\begin{minipage}{\textwidth}\small
 \captionof{table}{Zero-shot cross-dataset transfer through the class map}\label{tab:transfer}
 \resizebox{\textwidth}{!}{\begin{tabular}{lccccccc}
 \toprule
-\textbf{source} & \textbf{target} & \textbf{head} & \textbf{groups} & \textbf{n} & \textbf{accuracy} & \textbf{ci} & \textbf{macro\_f1} \\
+\textbf{source} & \textbf{target} & \textbf{head} & \textbf{groups} & \textbf{n} & \textbf{accuracy} & \textbf{95 \% CI} & \textbf{macro-F1} \\
 \midrule
 mura & unifesp & softmax & elbow,finger,forearm,hand,shoulder,wrist & 184 & 0.875 & [0.826, 0.924] & 0.8478 \\
 mura & unifesp & sigmoid & elbow,finger,forearm,hand,shoulder,wrist & 184 & 0.8804 & [0.837, 0.924] & 0.856 \\
@@ -17,4 +17,4 @@ unifesp & fracatlas & sigmoid & hand,hip,leg,shoulder & 3685 & 0.6982 & [0.684, 
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize Closed-set decision among the shared groups; CIs are image-level (the targets have no patient ids). The class map is an assumption to be checked by a clinician.}
-\end{center}
+\end{minipage}\end{center}

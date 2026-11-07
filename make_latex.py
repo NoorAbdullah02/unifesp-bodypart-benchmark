@@ -42,14 +42,17 @@ def md_tables(path):
     return out
 def to_tex(title, rows, note, label, fit=True):
     n = len(rows[0]); spec = "l" + "".join("c" for _ in range(n - 1))
-    body = "\\toprule\n" + " & ".join(r"\textbf{%s}" % esc(h) for h in rows[0]) + " \\\\\n\\midrule\n"
+    HM = {"sample_mean_F1": "sample-mean F1", "macro_F1": "macro-F1", "micro_F1": "micro-F1", "macro_f1": "macro-F1", "subset_acc": "subset acc.", "ci": "95 % CI", "private_score": "private score", "public_score": "public score"}
+    hd = [HM.get(h, h.replace("_", " ")) for h in rows[0]]
+    rows = [rows[0]] + [[("0.0000" if c in ("-0.0", "-0.0000") else c) for c in r] for r in rows[1:]]
+    body = "\\toprule\n" + " & ".join(r"\textbf{%s}" % esc(h) for h in hd) + " \\\\\n\\midrule\n"
     for r in rows[1:]: body += " & ".join(esc(c).replace("->", r"$\rightarrow$") for c in (r + [""] * n)[:n]) + " \\\\\n"
     body += "\\bottomrule\n"
     tab = "\\begin{tabular}{%s}\n%s\\end{tabular}" % (spec, body)
     if fit: tab = "\\resizebox{\\textwidth}{!}{%s}" % tab
     cap = re.sub(r"^Table \d+\.\s*", "", title); num = int(re.match(r"Table (\d+)", title)[1])
     new = MAINMAP.get(num) or SUPPMAP[num]
-    return "\\setcounter{table}{%d}\n\\Needspace*{9\\baselineskip}\n\\begin{center}\\small\n\\captionof{table}{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{center}\n" % (new - 1, tex(cap), label, tab, tex(note))
+    return "\\setcounter{table}{%d}\n\\Needspace*{9\\baselineskip}\n\\begin{center}\\begin{minipage}{\\textwidth}\\small\n\\captionof{table}{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{minipage}\\end{center}\n" % (new - 1, tex(cap), label, tab, tex(note))
 names = ["main", "runs", "kaggle", "ablation", "decoding", "gate", "mura", "covid", "transfer", "explain"]
 for i, (t, rows, note) in enumerate(md_tables("results/paper_tables.md")):
     open(f"{L}/tables/t{i+1:02d}_{names[i]}.tex", "w", encoding="utf-8").write(to_tex(t, rows, note, f"tab:{names[i]}"))

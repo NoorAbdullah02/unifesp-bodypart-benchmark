@@ -1,10 +1,10 @@
 \setcounter{table}{1}
 \Needspace*{9\baselineskip}
-\begin{center}\small
+\begin{center}\begin{minipage}{\textwidth}\small
 \captionof{table}{Kaggle UNIFESP private score vs. the competition leaderboard}\label{tab:kaggle}
 \resizebox{\textwidth}{!}{\begin{tabular}{lcc}
 \toprule
-\textbf{entry} & \textbf{private\_score} & \textbf{public\_score} \\
+\textbf{entry} & \textbf{private score} & \textbf{public score} \\
 \midrule
 \#1 Harshit Sheoran & 0.93378 &  \\
 \#2 JGK (ResNet50/152, FastAI) & 0.92787 &  \\
@@ -15,5 +15,5 @@ ours: stage-1 ensemble (late submission) & 0.92563 & 0.92704 \\
 \#5 wangkui & 0.92182 &  \\
 \bottomrule
 \end{tabular}}
-\par\smallskip{\footnotesize Mean F1 (sample-wise); private score uses \textasciitilde{}60 \% of the test set with the original (partly noisy) labels, so differences of \textasciitilde{}0.003 are within noise. Late submissions are not listed on the leaderboard; report ALL submissions made.}
-\end{center}
+\par\smallskip{\footnotesize Mean F1 (sample-wise); private score uses \textasciitilde{}60 \% of the test set with the original (partly noisy) labels, so differences of \textasciitilde{}0.003 are within noise. Late submissions are not listed on the leaderboard; we report every submission we made.}
+\end{minipage}\end{center}

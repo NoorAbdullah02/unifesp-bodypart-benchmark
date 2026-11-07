@@ -56,7 +56,7 @@ for line in body.split("\n"):
         t = doc.add_table(rows=len(rows), cols=len(rows[0])); t.style = "Light Grid Accent 1"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
         for i2, row in enumerate(rows):
             for j2, c in enumerate(row[:len(rows[0])]):
-                cell = t.cell(i2, j2); cell.text = ""; rr = cell.paragraphs[0].add_run(c); rr.font.size = Pt(8); rr.bold = (i2 == 0)
+                cell = t.cell(i2, j2); cell.text = ""; rr = cell.paragraphs[0].add_run(c.replace("_", " ") if i2 == 0 else c); rr.font.size = Pt(8); rr.bold = (i2 == 0)
         nn = doc.add_paragraph(); rn = nn.add_run(note); rn.italic = True; rn.font.size = Pt(8)
         continue
     if line.startswith("## "): doc.add_heading(re.sub(r"^## \d* ?", "", line) if False else line[3:], 1)

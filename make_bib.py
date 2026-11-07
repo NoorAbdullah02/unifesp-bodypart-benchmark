@@ -35,6 +35,7 @@ def clean(t): return re.sub(r"\s+"," ",t.replace("{\\~a}","ã").replace("\\%","\
 def authors(a):
     out=[]
     for p in re.split(r"\s+and\s+",a):
+        if p.strip()=="others": out.append("et al."); continue
         if "," in p:
             l,f=[x.strip() for x in p.split(",",1)]
         else:
@@ -47,6 +48,7 @@ items=[]
 for typ,key,d in ents:
     au=authors(d.get("author","")) if d.get("author") else [strip(d.get("organization",d.get("howpublished","")))]
     if len(au)>6: a=", ".join(au[:6])+", et al."
+    elif au[-1]=="et al.": a=", ".join(au)
     elif len(au)>1: a=", ".join(au[:-1])+" and "+au[-1]
     else: a=au[0]
     first=au[0].split(",")[0]; yr=d.get("year","n.d.")

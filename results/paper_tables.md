@@ -36,7 +36,7 @@ _OOF = pooled out-of-fold sample-mean F1 of the chosen variant is in the full CS
 | #4 KobeU Systems Medicine | 0.92414 |  |
 | #5 wangkui | 0.92182 |  |
 
-_Mean F1 (sample-wise); private score uses ~60 % of the test set with the original (partly noisy) labels, so differences of ~0.003 are within noise. Late submissions are not listed on the leaderboard; report ALL submissions made._
+_Mean F1 (sample-wise); private score uses ~60 % of the test set with the original (partly noisy) labels, so differences of ~0.003 are within noise. Late submissions are not listed on the leaderboard; we report every submission we made._
 
 ## Table 4. Ablations (5 CV folds each, same held-out set; paired patient bootstrap vs. the reference)
 

@@ -1,6 +1,6 @@
 \setcounter{table}{3}
 \Needspace*{9\baselineskip}
-\begin{center}\small
+\begin{center}\begin{minipage}{\textwidth}\small
 \captionof{table}{Ablations (5 CV folds each, same held-out set; paired patient bootstrap vs. the reference)}\label{tab:ablation}
 \resizebox{\textwidth}{!}{\begin{tabular}{lccccc}
 \toprule
@@ -13,7 +13,7 @@ swin\_tiny\_s224\_ce1 & 0.9132 [0.8616, 0.9568] & 0.8495 & 0.0012 & 0.0043 [-0.0
 swin\_tiny\_s224\_leaky & 0.9163 [0.8644, 0.9587] & 0.856 & 0.0144 & 0.0074 [-0.0020, 0.0178] & 0.141 \\
 swin\_tiny\_s224\_seed1 & 0.9143 [0.8620, 0.9576] & 0.8533 & 0.0028 & 0.0055 [-0.0060, 0.0173] & 0.366 \\
 swin\_tiny\_s224\_seed2 & 0.9154 [0.8635, 0.9592] & 0.8585 & -0.0014 & 0.0065 [-0.0049, 0.0178] & 0.268 \\
-hybrid\_gate\_s224 & 0.9136 [0.8609, 0.9568] & 0.8497 & -0.0 & 0.0047 [-0.0063, 0.0161] & 0.401 \\
+hybrid\_gate\_s224 & 0.9136 [0.8609, 0.9568] & 0.8497 & 0.0000 & 0.0047 [-0.0063, 0.0161] & 0.401 \\
 hybrid\_gate\_ln\_s224 & 0.9158 [0.8641, 0.9577] & 0.8536 & -0.0019 & 0.0069 [-0.0032, 0.0182] & 0.226 \\
 hybrid\_avg\_s224 & 0.9164 [0.8651, 0.9585] & 0.8537 & -0.0004 & 0.0075 [-0.0048, 0.0201] & 0.235 \\
 hybrid\_cnn\_s224 & 0.9205 [0.8684, 0.9613] & 0.8705 & -0.0012 & 0.0117 [-0.0016, 0.0257] & 0.097 \\
@@ -24,4 +24,4 @@ swin\_3seeds\_average & 0.9137 [0.8623, 0.9574] & 0.848 & 0.0012 & 0.0049 [-0.00
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize \texttt{OOF - held-out} large and positive = the validation score over-estimates (compare \texttt{\_leaky} with the patient-level reference for the split ablation).}
-\end{center}
+\end{minipage}\end{center}

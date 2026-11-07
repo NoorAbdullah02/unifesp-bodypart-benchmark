@@ -1,6 +1,6 @@
 \setcounter{table}{5}
 \Needspace*{9\baselineskip}
-\begin{center}\small
+\begin{center}\begin{minipage}{\textwidth}\small
 \captionof{table}{Most frequent held-out confusions (number of missed images, per model; fold-0 models)}\label{tab:confusions}
 \resizebox{\textwidth}{!}{\begin{tabular}{lcccc}
 \toprule
@@ -19,4 +19,4 @@ Abdomen & Lumbar Spine & 1 & 0 & 1 \\
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize 'Others' is missed mostly as Abdomen or Pelvis by all three models; Hip is missed as Pelvis. Source: top\_confusions.csv of the explainability notebook.}
-\end{center}
+\end{minipage}\end{center}
