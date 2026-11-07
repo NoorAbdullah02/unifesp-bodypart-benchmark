@@ -55,3 +55,8 @@ Datasets
 | G. Label noise | error review of "Others", Hip, Forearm; effect of dropping suspected-noisy images from the *evaluation* | D1 | per-class F1 with/without, clearly labelled as post-hoc |
 
 Compute (unmeasured guesses): D1 grid ~2-3 h per block of 6 backbones x 5 folds on T4 x2; D2 is 40k images (their earlier run: ~3.5 min per epoch per fold) so use 1-2 backbones, 5 folds, ~6-8 h; D4 ~2 h per backbone; F is minutes. All on ONE Kaggle account (terms of use).
+
+## 5. Addendum (re-search, Nov 2026)
+* Fink et al., Eur Radiol Exp 2024 (doi:10.1186/s41747-023-00417-x): projection and body-side classification in musculoskeletal radiographs with a patient-level split (accuracy about 0.975). Closest MSK-radiograph work found; it does not measure what the split changes. Cited in Related work.
+* Shamim and Hussain, medRxiv 2026 (doi:10.64898/2026.10.14.26365516): calibration, uncertainty and data efficiency of chest-radiograph disease classifiers under cross-dataset shift. Preprint, different task. Cited as such.
+* Searches for a UNIFESP benchmark with patient-level evaluation, calibration, label audit and transfer again found only Krishnan and Padmavathi 2025. "Not found" is not proof; wording in the paper stays hedged ("we did not find").
