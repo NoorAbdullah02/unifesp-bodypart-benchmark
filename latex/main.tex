@@ -1,18 +1,27 @@
-% Overleaf-ready skeleton generated from MANUSCRIPT_v2.md. Text is a STARTING POINT: rewrite in your own words, add \cite{} keys (see refs.bib), delete the red [VERIFY] tags once checked.
-% Journal templates: Elsevier journals (CMIG, CBM) -> elsarticle.cls (documentclass[review]{elsarticle}); Springer (JIIM) -> sn-jnl.cls. Switch the class and keep the \input lines.
-\documentclass[11pt,a4paper]{article}
-\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}\usepackage{lmodern}
-\usepackage[margin=2.2cm]{geometry}\usepackage{graphicx,booktabs,xcolor,hyperref,amsmath,caption,subcaption,float,natbib}
-\hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black}
+% Elsevier (elsarticle) version for Computerized Medical Imaging and Graphics. Compile on Overleaf (elsarticle is preinstalled there).
+% Upload the whole folder; refs.bib, sections/, tables/, figures/ must sit next to this file. Supplementary tables are in supplementary.tex.
+\documentclass[review]{elsarticle}
+\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}
+\usepackage{graphicx,booktabs,xcolor,hyperref,amsmath,float,caption}
 \graphicspath{{figures/}}
+\journal{Computerized Medical Imaging and Graphics}
+\begin{document}
+\begin{frontmatter}
 \title{How reliable are radiograph body-part classifiers? A leakage-controlled, cross-dataset benchmark with reliability and label-quality analysis on public data}
-\author{Sheikh Noor Abdullah$^{1,*}$\thanks{Corresponding author. ORCID: \href{https://orcid.org/0009-0002-7193-4284}{0009-0002-7193-4284}} \and A.B.M. Kabir Hossain$^{1}$\\[4pt]
-{\small $^{1}$Department of Information and Communication Engineering, Bangladesh Army University of Engineering \& Technology (BAUET),\\ Qadirabad Cantonment, Natore, Bangladesh}\\[2pt]
-{\small $^{*}$Corresponding author: \texttt{sheikhnoorabdullah02@gmail.com}; \texttt{kabir111192@gmail.com}}}
-\date{}
-\begin{document}\maketitle
-\begin{abstract}\input{sections/abstract}\end{abstract}
-\noindent\textbf{Keywords:} body-part classification; radiograph; data leakage; reproducibility; calibration; label noise
+\author[bauet]{Sheikh Noor Abdullah\corref{cor1}\fnref{orcid}}
+\ead{sheikhnoorabdullah02@gmail.com}
+\author[bauet]{A.B.M. Kabir Hossain}
+\ead{kabir111192@gmail.com}
+\cortext[cor1]{Corresponding author}
+\fntext[orcid]{ORCID: 0009-0002-7193-4284}
+\affiliation[bauet]{organization={Department of Information and Communication Engineering, Bangladesh Army University of Engineering \& Technology (BAUET)},addressline={Qadirabad Cantonment},city={Natore},country={Bangladesh}}
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+\begin{keyword}
+body-part classification \sep radiograph \sep data leakage \sep reproducibility \sep calibration \sep label noise
+\end{keyword}
+\end{frontmatter}
 \input{sections/introduction}
 \input{sections/related_work}
 \input{sections/data}
@@ -23,12 +32,13 @@
 \input{sections/conclusion}
 \input{sections/declarations}
 \input{sections/declaration_of_generativ}
-\bibliographystyle{plainnat}\bibliography{refs}
-\clearpage\appendix
-\section{Tables}
-\input{tables/t01_main}\input{tables/t02_runs}\input{tables/t03_kaggle}\input{tables/t04_ablation}\input{tables/t05_decoding}\input{tables/t06_gate}
-\input{tables/t07_mura}\input{tables/t08_covid}\input{tables/t09_transfer}\input{tables/t10_explain}\input{tables/t11_stage2}\input{tables/t12_confusions}\input{tables/t13_per_class}\input{tables/t14_label_audit}\input{tables/t15_dataset}
-\section{Figures}
+\bibliographystyle{elsarticle-harv}
+\bibliography{refs}
+\clearpage
+\section*{Tables}
+\input{tables/t01_main}\input{tables/t03_kaggle}\input{tables/t04_ablation}\input{tables/t07_mura}\input{tables/t09_transfer}\input{tables/t11_stage2}
+\clearpage
+\section*{Figures}
 \begin{figure}[H]\centering\includegraphics[width=\textwidth]{fig1_protocol.pdf}\caption{Leakage-controlled evaluation protocol.}\label{fig:protocol}\end{figure}
 \begin{figure}[H]\centering\includegraphics[width=\textwidth]{fig10_heldout_overview.pdf}\caption{Held-out sample-F1 of a frozen-encoder probe, the fine-tuned Swin-T, the best single model and the ensemble; all 95\% CIs overlap.}\label{fig:overview}\end{figure}
 \begin{figure}[H]\centering\includegraphics[width=.9\textwidth]{fig2_ablation_forest.pdf}\caption{Ablations: change in held-out sample-F1 versus the reference Swin-T (95\% paired patient-bootstrap CI, p-values on the right).}\label{fig:ablation}\end{figure}

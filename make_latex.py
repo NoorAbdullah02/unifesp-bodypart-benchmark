@@ -5,8 +5,14 @@ import pandas as pd, numpy as np
 L = "latex"; [os.makedirs(f"{L}/{d}", exist_ok=True) for d in ("tables", "figures", "sections")]
 ESC = {"\\": r"\textbackslash{}", "&": r"\&", "%": r"\%", "$": r"\$", "#": r"\#", "_": r"\_", "{": r"\{", "}": r"\}", "~": r"\textasciitilde{}", "^": r"\^{}"}
 def esc(s): return "".join(ESC.get(c, c) for c in s)
+MAIN = {1, 3, 4, 7, 9, 11}
+def fixref(s):
+    one = lambda n: ("Table %d" % n) if n in MAIN else ("Supplementary Table S%d" % n)
+    s = re.sub(r"Tables (\d+) (and|to) (\d+)", lambda mm: "%s %s %s" % (one(int(mm[1])), mm[2], one(int(mm[3]))), s)
+    return re.sub(r"Table (\d+)\b", lambda mm: one(int(mm[1])), s)
 URL = re.compile(r"https?://[^\s)\]]+[^\s).,;\]]")
 def tex(s):
+    s = fixref(s)
     urls = []
     def keep(mm): urls.append(mm[0]); return "URLPLACEHOLDER%dX" % (len(urls) - 1)
     s = URL.sub(keep, s)
@@ -39,7 +45,8 @@ def to_tex(title, rows, note, label, fit=True):
     tab = "\\begin{tabular}{%s}\n%s\\end{tabular}" % (spec, body)
     if fit: tab = "\\resizebox{\\textwidth}{!}{%s}" % tab
     cap = re.sub(r"^Table \d+\.\s*", "", title)
-    return "\\begin{table}[t]\n\\centering\\small\n\\caption{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{table}\n" % (tex(cap), label, tab, tex(note))
+    num = int(re.match(r"Table (\d+)", title)[1])
+    return "\\setcounter{table}{%d}\n\\begin{table}[t]\n\\centering\\small\n\\caption{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{table}\n" % (num - 1, tex(cap), label, tab, tex(note))
 names = ["main", "runs", "kaggle", "ablation", "decoding", "gate", "mura", "covid", "transfer", "explain"]
 for i, (t, rows, note) in enumerate(md_tables("results/paper_tables.md")):
     open(f"{L}/tables/t{i+1:02d}_{names[i]}.tex", "w", encoding="utf-8").write(to_tex(t, rows, note, f"tab:{names[i]}"))
