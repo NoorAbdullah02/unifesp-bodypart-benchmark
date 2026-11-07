@@ -84,7 +84,8 @@ All numbers come from files in [`results/`](results/); the full list with source
 | `make_latex.py`, `make_bib.py`, `build_docx.py`, `figlib.py`, `trim.py` | manuscript builders (LaTeX with automatic figure numbering, Word) |
 | `results/` | printed outputs and CSVs of the Kaggle runs; `results/kaggle_raw/` holds files downloaded from the public notebooks |
 | `figures/`, `latex/`, `submission/` | paper figures (PNG), Elsevier-style LaTeX source, cover letter, highlights, title page |
-| `docs/` | verified citations, dataset provenance and licence checks, the table of every number used in the paper, runbook |
+| `Figures_for_upload/` | the 13 manuscript figures as separate PNG files with `captions.txt`, ready for journal upload |
+| `docs/` | verified citations, dataset provenance and licence checks, the table of every number used in the paper, runbook; `docs/working_notes/` (novelty, journal shortlist, claim checklist) and `docs/drafts/` (earlier manuscript versions) |
 | `MANUSCRIPT_v2.md` | working manuscript text that the builders read |
 
 ## Data (not included)
