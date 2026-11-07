@@ -1,7 +1,6 @@
 \setcounter{table}{1}
-\Needspace*{9\baselineskip}
-\begin{center}\begin{minipage}{\textwidth}\small
-\captionof{table}{Decoding ablation and evaluation leakage}\label{tab:decoding}
+\begin{table}[!ht]\centering\small
+\caption{Decoding ablation and evaluation leakage}\label{tab:decoding}
 \resizebox{\textwidth}{!}{\begin{tabular}{lcc}
 \toprule
 \textbf{decoding} & \textbf{held-out sample-F1 [95\% CI]} & \textbf{macro-F1} \\
@@ -14,4 +13,4 @@ per-class thresholds tuned on HELD-OUT (leaky) + min-one & 0.9182 [0.8668, 0.959
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize Leak gap (thresholds tuned on the held-out set minus thresholds tuned on OOF) = +0.0083.}
-\end{minipage}\end{center}
+\end{table}

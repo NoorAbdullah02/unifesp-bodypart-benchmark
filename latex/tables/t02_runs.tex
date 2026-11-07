@@ -1,7 +1,6 @@
 \setcounter{table}{0}
-\Needspace*{9\baselineskip}
-\begin{center}\begin{minipage}{\textwidth}\small
-\captionof{table}{Single runs (head/TTA variant chosen on OOF)}\label{tab:runs}
+\begin{table}[!ht]\centering\small
+\caption{Single runs (head/TTA variant chosen on OOF)}\label{tab:runs}
 \resizebox{\textwidth}{!}{\begin{tabular}{lccc}
 \toprule
 \textbf{run} & \textbf{chosen variant} & \textbf{oof chosen variant} & \textbf{holdout sample mean f1 0.5 min one} \\
@@ -15,4 +14,4 @@ efficientnet\_b3\_s256\_hv & blend\_tta & 0.9133 & 0.9172 \\
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize OOF = pooled out-of-fold sample-mean F1 of the chosen variant is in the full CSV.}
-\end{minipage}\end{center}
+\end{table}

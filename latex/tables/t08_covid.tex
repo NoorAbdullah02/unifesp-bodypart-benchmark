@@ -1,7 +1,6 @@
 \setcounter{table}{3}
-\Needspace*{9\baselineskip}
-\begin{center}\begin{minipage}{\textwidth}\small
-\captionof{table}{COVID-19 Radiography (4 classes, image-level split)}\label{tab:covid}
+\begin{table}[!ht]\centering\small
+\caption{COVID-19 Radiography (4 classes, image-level split)}\label{tab:covid}
 \resizebox{\textwidth}{!}{\begin{tabular}{lccc}
 \toprule
 \textbf{held-out images} & \textbf{sample-F1 [95\% CI]} & \textbf{macro-F1 [95\% CI]} & \textbf{subset acc} \\
@@ -10,4 +9,4 @@
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize No patient identifiers exist in this dataset: the split is image-level and the numbers may be optimistic (state this limitation).}
-\end{minipage}\end{center}
+\end{table}

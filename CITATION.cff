@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: "unifesp-bodypart-benchmark: leakage-controlled benchmark for radiograph body-part classification"
-message: "If you use this code, please cite the manuscript (reference to be added on publication)."
+message: "If you use this code, please cite the software release (and the paper once it is published)."
 authors:
   - family-names: "Abdullah"
     given-names: "Sheikh Noor"

@@ -52,7 +52,7 @@ def to_tex(title, rows, note, label, fit=True):
     if fit: tab = "\\resizebox{\\textwidth}{!}{%s}" % tab
     cap = re.sub(r"^Table \d+\.\s*", "", title); num = int(re.match(r"Table (\d+)", title)[1])
     new = MAINMAP.get(num) or SUPPMAP[num]
-    return "\\setcounter{table}{%d}\n\\Needspace*{9\\baselineskip}\n\\begin{center}\\begin{minipage}{\\textwidth}\\small\n\\captionof{table}{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{minipage}\\end{center}\n" % (new - 1, tex(cap), label, tab, tex(note))
+    return "\\setcounter{table}{%d}\n\\begin{table}[!ht]\\centering\\small\n\\caption{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{table}\n" % (new - 1, tex(cap), label, tab, tex(note))
 names = ["main", "runs", "kaggle", "ablation", "decoding", "gate", "mura", "covid", "transfer", "explain"]
 for i, (t, rows, note) in enumerate(md_tables("results/paper_tables.md")):
     open(f"{L}/tables/t{i+1:02d}_{names[i]}.tex", "w", encoding="utf-8").write(to_tex(t, rows, note, f"tab:{names[i]}"))

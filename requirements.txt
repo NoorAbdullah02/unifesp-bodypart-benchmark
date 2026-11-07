@@ -1,4 +1,4 @@
-# versions to be pinned from the Kaggle run logs before public release (only PyTorch is confirmed from the logs: 2.11.0+cu130)
+# Only PyTorch is confirmed from the Kaggle run logs (2.11.0+cu130); the other libraries were the versions preinstalled on the Kaggle image (Oct-Nov 2026), not recorded
 torch==2.11.0
 timm
 albumentations

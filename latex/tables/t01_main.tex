@@ -1,7 +1,6 @@
 \setcounter{table}{0}
-\Needspace*{9\baselineskip}
-\begin{center}\begin{minipage}{\textwidth}\small
-\captionof{table}{UNIFESP held-out performance (decisions made on out-of-fold predictions only)}\label{tab:main}
+\begin{table}[!ht]\centering\small
+\caption{UNIFESP held-out performance (decisions made on out-of-fold predictions only)}\label{tab:main}
 \resizebox{\textwidth}{!}{\begin{tabular}{lcccc}
 \toprule
 \textbf{decoding} & \textbf{sample-mean F1} & \textbf{macro-F1} & \textbf{micro-F1} & \textbf{subset acc.} \\
@@ -13,4 +12,4 @@ best single run by OOF (convnext\_tiny\_s256), 0.5 + min-one & 0.9123 & 0.8482 &
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize Held-out set: 323 images / 156 patients; 95 \% CIs by patient-level bootstrap. Ensemble minus best single: +0.0066 [-0.0002, +0.0142], p = 0.063. Ensemble weights (OOF, Caruana): efficientnetv2\_s\_s256 0.10, convnext\_tiny\_s256 0.27, resnet50\_s256\_heavy 0.29, efficientnet\_b3\_s256\_hv 0.34.}
-\end{minipage}\end{center}
+\end{table}

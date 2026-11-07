@@ -1,7 +1,6 @@
 \setcounter{table}{5}
-\Needspace*{9\baselineskip}
-\begin{center}\begin{minipage}{\textwidth}\small
-\captionof{table}{Most frequent held-out confusions (number of missed images, per model; fold-0 models)}\label{tab:confusions}
+\begin{table}[!ht]\centering\small
+\caption{Most frequent held-out confusions (number of missed images, per model; fold-0 models)}\label{tab:confusions}
 \resizebox{\textwidth}{!}{\begin{tabular}{lcccc}
 \toprule
 \textbf{true class (missed)} & \textbf{predicted instead} & \textbf{ConvNeXt-T} & \textbf{ResNet50} & \textbf{Swin-T} \\
@@ -19,4 +18,4 @@ Abdomen & Lumbar Spine & 1 & 0 & 1 \\
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize 'Others' is missed mostly as Abdomen or Pelvis by all three models; Hip is missed as Pelvis. Source: top\_confusions.csv of the explainability notebook.}
-\end{minipage}\end{center}
+\end{table}
