@@ -34,23 +34,34 @@ for line in body.split("\n"):
             if os.path.exists(png): p.add_run().add_picture(png, width=Inches(2.0 if len(files) > 1 else 5.2))
         q = doc.add_paragraph(); rr = q.add_run("Fig. %s. " % num); rr.bold = True; q.add_run(cap)
         continue
+    if line.startswith("[[TAB|"):
+        key = line.strip("[]").split("|")[1]
+        mp = {"t01_main": (1, 1), "t03_kaggle": (3, 2), "t11_stage2": (11, 3), "t04_ablation": (4, 4), "t07_mura": (7, 5), "t09_transfer": (9, 6)}
+        old, new = mp[key]
+        if old == 11:
+            title = "Stage 2: out-of-fold results on all 1,738 training images and Kaggle late-submission scores"
+            rows = [["ensemble", "OOF sample-F1 [95% CI]", "macro-F1", "subset acc.", "Kaggle private / public"],
+                    ["s2a: 8 models, no pseudo-labels", "0.9262 [0.9092, 0.9414]", "0.8749", "0.8867", "not submitted"],
+                    ["s2b: 8 models, pseudo-labels", "0.9233 [0.9058, 0.9392]", "0.8587", "0.8855", "not submitted"],
+                    ["s2u: union (16 models)", "0.9279 [0.9116, 0.9428]", "0.8754", "0.8884", "0.92638 / 0.93378"],
+                    ["difference s2u - s2a", "+0.0017 [-0.0010, +0.0046], p = 0.25", "", "", ""],
+                    ["difference s2b - s2a", "-0.0029 [-0.0092, +0.0034], p = 0.36", "", "", ""]]
+            note = "OOF numbers are not comparable with the held-out numbers; ensemble weights are fitted on the same OOF predictions, so the union estimate is optimistic. Pseudo-labels use unlabelled test images."
+        else:
+            blk = [b for b in re.split(r"\n(?=## Table )", tables_md) if b.startswith("## Table %d." % old)][0]
+            L = blk.strip().split("\n"); title = re.sub(r"^Table \d+\.\s*", "", L[0][3:])
+            rows = [[c.strip() for c in l.strip("|").split("|")] for l in L if l.startswith("|") and not re.match(r"^\|[-| ]+\|$", l)]
+            note = " ".join(l.strip("_") for l in L if l.startswith("_") and l.endswith("_"))
+        cp = doc.add_paragraph(); r0 = cp.add_run("Table %d. " % new); r0.bold = True; cp.add_run(title)
+        t = doc.add_table(rows=len(rows), cols=len(rows[0])); t.style = "Light Grid Accent 1"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
+        for i2, row in enumerate(rows):
+            for j2, c in enumerate(row[:len(rows[0])]):
+                cell = t.cell(i2, j2); cell.text = ""; rr = cell.paragraphs[0].add_run(c); rr.font.size = Pt(8); rr.bold = (i2 == 0)
+        nn = doc.add_paragraph(); rn = nn.add_run(note); rn.italic = True; rn.font.size = Pt(8)
+        continue
     if line.startswith("## "): doc.add_heading(re.sub(r"^## \d* ?", "", line) if False else line[3:], 1)
     elif line.startswith("### "): doc.add_heading(line[4:], 2)
     elif re.match(r"^\* ", line): runs(doc.add_paragraph(style="List Bullet"), line[2:])
     elif re.match(r"^\d+\. ", line): runs(doc.add_paragraph(style="List Number"), re.sub(r"^\d+\. ", "", line))
     else: runs(doc.add_paragraph(), line)
-# ---- tables
-doc.add_page_break(); doc.add_heading("Tables", 1)
-for block in re.split(r"\n(?=## Table )", tables_md):
-    if not block.startswith("## Table"): continue
-    lines = block.strip().split("\n"); doc.add_paragraph().add_run(lines[0][3:]).bold = True
-    rows = [l for l in lines if l.startswith("|") and not re.match(r"^\|[-| ]+\|$", l)]
-    cells = [[c.strip() for c in r.strip("|").split("|")] for r in rows]
-    t = doc.add_table(rows=len(cells), cols=len(cells[0])); t.style = "Light Grid Accent 1"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
-    for i, row in enumerate(cells):
-        for j, c in enumerate(row[:len(cells[0])]):
-            cell = t.cell(i, j); cell.text = ""; pr = cell.paragraphs[0]; rr = pr.add_run(c); rr.font.size = Pt(8); rr.bold = (i == 0)
-    for l in lines:
-        if l.startswith("_") and l.endswith("_"): q = doc.add_paragraph(); rr = q.add_run(l.strip("_")); rr.italic = True; rr.font.size = Pt(8)
-    doc.add_paragraph()
 doc.save("submission/manuscript.docx"); print("wrote submission/manuscript.docx")

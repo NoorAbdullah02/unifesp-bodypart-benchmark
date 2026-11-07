@@ -1,7 +1,7 @@
-\setcounter{table}{8}
-\begin{table}[t]
-\centering\small
-\caption{Zero-shot cross-dataset transfer through the class map}\label{tab:transfer}
+\setcounter{table}{5}
+\Needspace*{12\baselineskip}
+\begin{center}\small
+\captionof{table}{Zero-shot cross-dataset transfer through the class map}\label{tab:transfer}
 \resizebox{\textwidth}{!}{\begin{tabular}{lccccccc}
 \toprule
 \textbf{source} & \textbf{target} & \textbf{head} & \textbf{groups} & \textbf{n} & \textbf{accuracy} & \textbf{ci} & \textbf{macro\_f1} \\
@@ -17,4 +17,4 @@ unifesp & fracatlas & sigmoid & hand,hip,leg,shoulder & 3685 & 0.6982 & [0.684, 
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize Closed-set decision among the shared groups; CIs are image-level (the targets have no patient ids). The class map is an assumption to be checked by a clinician.}
-\end{table}
+\end{center}

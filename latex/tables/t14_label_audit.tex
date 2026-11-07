@@ -1,7 +1,7 @@
-\setcounter{table}{13}
-\begin{table}[t]
-\centering\small
-\caption{Suspected label errors in the training pool (out-of-fold, 39 of 1,415 images, 2.8 \%)}\label{tab:audit}
+\setcounter{table}{7}
+\Needspace*{12\baselineskip}
+\begin{center}\small
+\captionof{table}{Suspected label errors in the training pool (out-of-fold, 39 of 1,415 images, 2.8 \%)}\label{tab:audit}
 \resizebox{\textwidth}{!}{\begin{tabular}{lcc}
 \toprule
 \textbf{given label} & \textbf{model says (p >= 0.9)} & \textbf{n} \\
@@ -36,4 +36,4 @@ Thoracic Spine & Chest & 1 \\
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize Suspects only: the model may be wrong; none has been reviewed by an expert. The 39 images come from 33 patients.}
-\end{table}
+\end{center}

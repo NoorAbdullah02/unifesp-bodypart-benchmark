@@ -5,11 +5,15 @@ import pandas as pd, numpy as np
 L = "latex"; [os.makedirs(f"{L}/{d}", exist_ok=True) for d in ("tables", "figures", "sections")]
 ESC = {"\\": r"\textbackslash{}", "&": r"\&", "%": r"\%", "$": r"\$", "#": r"\#", "_": r"\_", "{": r"\{", "}": r"\}", "~": r"\textasciitilde{}", "^": r"\^{}"}
 def esc(s): return "".join(ESC.get(c, c) for c in s)
-MAIN = {1, 3, 4, 7, 9, 11}
+MAINMAP = {1: 1, 3: 2, 11: 3, 4: 4, 7: 5, 9: 6}
+SUPPMAP = {2: 1, 5: 2, 6: 3, 8: 4, 10: 5, 12: 6, 13: 7, 14: 8, 15: 9}
+MAIN = set(MAINMAP)
 def fixref(s):
-    one = lambda n: ("Table %d" % n) if n in MAIN else ("Supplementary Table S%d" % n)
-    s = re.sub(r"Tables (\d+) (and|to) (\d+)", lambda mm: "%s %s %s" % (one(int(mm[1])), mm[2], one(int(mm[3]))), s)
-    return re.sub(r"Table (\d+)\b", lambda mm: one(int(mm[1])), s)
+    lab = lambda n: ("Table %d" % MAINMAP[n]) if n in MAINMAP else ("Supplementary Table S%d" % SUPPMAP[n])
+    def sub(mm):
+        a, sep, b = int(mm[2]), mm[3], mm[4]
+        return lab(a) if not b else "%s %s %s" % (lab(a), sep, lab(int(b)))
+    return re.sub(r"(Supplementary )?Tables? (\d+)(?: (and|to) (\d+))?", sub, s)
 URL = re.compile(r"https?://[^\s)\]]+[^\s).,;\]]")
 def tex(s):
     s = fixref(s)
@@ -37,16 +41,15 @@ def md_tables(path):
         out.append((title, rows, note))
     return out
 def to_tex(title, rows, note, label, fit=True):
-    n = len(rows[0]); num = re.compile(r"^[-+]?[\d.,]+(\s*\[.*\])?")
-    spec = "l" + "".join("c" for _ in range(n - 1))
+    n = len(rows[0]); spec = "l" + "".join("c" for _ in range(n - 1))
     body = "\\toprule\n" + " & ".join(r"\textbf{%s}" % esc(h) for h in rows[0]) + " \\\\\n\\midrule\n"
     for r in rows[1:]: body += " & ".join(esc(c).replace("->", r"$\rightarrow$") for c in (r + [""] * n)[:n]) + " \\\\\n"
     body += "\\bottomrule\n"
     tab = "\\begin{tabular}{%s}\n%s\\end{tabular}" % (spec, body)
     if fit: tab = "\\resizebox{\\textwidth}{!}{%s}" % tab
-    cap = re.sub(r"^Table \d+\.\s*", "", title)
-    num = int(re.match(r"Table (\d+)", title)[1])
-    return "\\setcounter{table}{%d}\n\\begin{table}[t]\n\\centering\\small\n\\caption{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{table}\n" % (num - 1, tex(cap), label, tab, tex(note))
+    cap = re.sub(r"^Table \d+\.\s*", "", title); num = int(re.match(r"Table (\d+)", title)[1])
+    new = MAINMAP.get(num) or SUPPMAP[num]
+    return "\\setcounter{table}{%d}\n\\Needspace*{12\\baselineskip}\n\\begin{center}\\small\n\\captionof{table}{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{center}\n" % (new - 1, tex(cap), label, tab, tex(note))
 names = ["main", "runs", "kaggle", "ablation", "decoding", "gate", "mura", "covid", "transfer", "explain"]
 for i, (t, rows, note) in enumerate(md_tables("results/paper_tables.md")):
     open(f"{L}/tables/t{i+1:02d}_{names[i]}.tex", "w", encoding="utf-8").write(to_tex(t, rows, note, f"tab:{names[i]}"))
@@ -101,7 +104,10 @@ for p in parts:
                 body = "\\hfill".join("\\includegraphics[width=0.325\\textwidth]{%s}" % f for f in files)
             else:
                 body = "\\includegraphics[width=%s\\textwidth]{%s}" % (W.get(fn.rsplit(".", 1)[0], 0.7), fn)
-            out.append("\\begin{figure}[!t]\\centering%s\\caption{%s}\\label{fig:%s}\\end{figure}\\suppressfloats[t]" % (body, tex(cap), num)); continue
+            pl = "H" if (len(files) > 1 or fn.startswith("c3_")) else "!htbp"
+            out.append("\\begin{figure}[%s]\\centering%s\\caption{%s}\\label{fig:%s}\\end{figure}\\suppressfloats[t]" % (pl, body, tex(cap), num)); continue
+        if s.startswith("[[TAB|"):
+            out.append("\\input{tables/%s}" % s.strip("[]").split("|")[1]); continue
         if s.startswith("### "): out.append("\\subsection{%s}" % tex(re.sub(r"^\d+\.\d+\s*", "", s[4:]))); continue
         if s.startswith("* ") or re.match(r"^\d+\. ", s):
             out.append("\\begin{itemize}\\item " + tex(re.sub(r"^(\* |\d+\. )", "", s)) + "\\end{itemize}"); continue

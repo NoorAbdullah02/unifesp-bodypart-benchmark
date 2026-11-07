@@ -73,13 +73,18 @@ No new patient data were collected. Our code, split files, seeds and result file
 ## 5 Results
 ### 5.1 Main result (UNIFESP held-out set; Table 1)
 The ensemble of six runs, with thresholds tuned on OOF predictions, reached a sample-mean F1 of 0.9189 [0.8669, 0.9602], macro-F1 0.8630 [0.6891, 0.8916], micro-F1 0.9148 and subset accuracy 0.8885. At a plain 0.5 threshold the first two values are 0.9164 and 0.8537. The best single run by OOF (ConvNeXt-T) reached 0.9123, so the ensemble gained +0.0066 [-0.0002, +0.0142] (p = 0.063). Single runs (Table 2) lie between 0.910 and 0.922 (Fig. {{overview}}).
+[[TAB|t01_main]]
+
 [[FIG|overview|fig10_heldout_overview.png|Held-out sample-F1 for a frozen DINOv2-S probe, the fine-tuned Swin-T, the best single model and the ensemble. All 95 % confidence intervals overlap.]]
 
 ### 5.2 Competition score (Table 3)
 Both late submissions are unranked, and we report every submission we made. The Stage 1 ensemble scored 0.92563 on the private leaderboard and 0.92704 on the public one; the Stage 2 ensemble of 16 models scored 0.92638 and 0.93378. The final private leaderboard has 0.93378 in first place, 0.92787 in second and 0.92488 in third, so both of our submissions would sit between second and third .
+[[TAB|t03_kaggle]]
+
  The private score uses about 60 % of the 743 test images and their original, partly noisy labels. We estimate its standard error at about 0.012, which means the gap to first place (0.0074) cannot be resolved and the gain of Stage 2 over Stage 1 (+0.00075) is indistinguishable from noise.
-Stage 2 was evaluated differently, with OOF predictions on all 1,738 training images, so its numbers are not comparable with the held-out results (Table 11). The plain ensemble of 8 models scored 0.9262 [0.9092, 0.9414]. The same models retrained with pseudo-labels from 539 of the 743 unlabelled test images (confidence 0.9 or higher) scored 0.9233 [0.9058, 0.9392], and the union of all 16 models scored 0.9279 [0.9116, 0.9428]. In paired patient-bootstrap comparisons the union beat the plain ensemble by +0.0017 [-0.0010, +0.0046] (p = 0.25), and the pseudo-labelled models fell short of it by 0.0029 [-0.0092, +0.0034] (p = 0.36). Pseudo-labelling on its own did not help; it lowered both OOF F1 and macro-F1 (0.8749 to 0.8587). The union's small gain rests on weights fitted to the same OOF predictions, so it is optimistic. The pseudo-labelled set contains no Hand, Hip, Lumbar Spine, Thoracic Spine, Skull, Thigh, Forearm or Clavicles images and 322 Chest images, so it leans heavily towards frequent classes. Because the procedure uses test images, we do not report it as evidence of generalisation. Fig. {{kaggle}} shows the leaderboard context (top) and the three Stage 2 ensembles (bottom).
-[[FIG|kaggle|c4_kaggle_stage2.png|(Top) Private leaderboard scores; our two entries are late submissions and are not ranked. (Bottom) Stage 2 out-of-fold sample-F1 with 95 % patient-bootstrap intervals for the plain, the pseudo-labelled and the combined ensembles.]]
+Stage 2 was evaluated differently, with OOF predictions on all 1,738 training images, so its numbers are not comparable with the held-out results (Table 11). The plain ensemble of 8 models scored 0.9262 [0.9092, 0.9414]. The same models retrained with pseudo-labels from 539 of the 743 unlabelled test images (confidence 0.9 or higher) scored 0.9233 [0.9058, 0.9392], and the union of all 16 models scored 0.9279 [0.9116, 0.9428]. In paired patient-bootstrap comparisons the union beat the plain ensemble by +0.0017 [-0.0010, +0.0046] (p = 0.25), and the pseudo-labelled models fell short of it by 0.0029 [-0.0092, +0.0034] (p = 0.36). Pseudo-labelling on its own did not help; it lowered both OOF F1 and macro-F1 (0.8749 to 0.8587). The union's small gain rests on weights fitted to the same OOF predictions, so it is optimistic. The pseudo-labelled set contains no Hand, Hip, Lumbar Spine, Thoracic Spine, Skull, Thigh, Forearm or Clavicles images and 322 Chest images, so it leans heavily towards frequent classes. Because the procedure uses test images, we do not report it as evidence of generalisation.
+[[TAB|t11_stage2]]
+
 
 
 ### 5.3 Evaluation shortcuts (Tables 4 and 5)
@@ -88,6 +93,8 @@ With a random image-level split, the validation score exceeded the held-out scor
 
 ### 5.4 Ablations (Table 4)
 Against the reference Swin-T (0.9089 [0.8576, 0.9509]) no configuration differed significantly. Heavy augmentation changed F1 by -0.0075 (p = 0.088), dropping the softmax head by -0.0051 (p = 0.152), two other seeds by +0.0055 and +0.0065 (p = 0.37 and 0.27), DenseNet121 by +0.0111 (p = 0.119), the CNN-only fusion branch by +0.0117 (p = 0.097) and the average of three seeds by +0.0049 (p = 0.38). All 95 % intervals include zero. The seed-to-seed spread (0.9089 to 0.9154) is as large as most of these effects, so a single-run difference of this size should not be called an improvement (Fig. {{ablation}}).
+[[TAB|t04_ablation]]
+
 [[FIG|ablation|fig2_ablation_forest.png|Change in held-out sample-F1 against the reference Swin-T for each ablation (95 % paired patient-bootstrap interval; p-values on the right). None of the intervals excludes zero.]]
 
 ### 5.5 Fusion gate (Table 6)
@@ -99,9 +106,10 @@ A linear probe on frozen DINOv2-S reached 0.8699 OOF and 0.8859 on the held-out 
 ### 5.7 Reliability and label audit
 **Calibration.** Top-1 accuracy of the five-model ensemble on the held-out set was 0.9257. ECE was 0.0545, and 0.0517 after temperature scaling (T = 1.15), so the ensemble is already close to calibrated and scaling changes little.
 **Selective prediction.** Accuracy on the images the model kept rose from 0.926 at full coverage to 0.945 [0.900, 0.985] at 90 % coverage, 0.973 at 80 % and 0.982 at 70 %. A threshold chosen on OOF predictions for 0.95 accuracy gave 0.937 accuracy at 98.5 % coverage on the held-out set, so the target was missed. A 0.98 target gave 0.983 at 74 % coverage. Operating points chosen on OOF predictions therefore do not transfer exactly (Fig. {{reliability}}).
-[[FIG|reliability|fig4_reliability.png|(A) Accuracy on the images the model answers, as a function of coverage. (B) Accuracy targets chosen on out-of-fold predictions, and the accuracy reached on the held-out set.]]
 
 **Per class (held-out).** Chest reached an F1 of 0.993 (n = 138), and Cervical Spine, Feet, Hand, Sinus, Skull and Thigh reached 1.0. The weakest classes were Others (recall 0.41 [0.13, 0.91]), Forearm (0.33), Hip (0.33), Shoulder (0.60) and Ankle (0.75), all with 3 to 22 positives and wide intervals (Supplementary Table 13 and Supplementary Fig. S1).
+[[FIG|reliability|fig4_reliability.png|(A) Accuracy on the images the model answers, as a function of coverage. (B) Accuracy targets chosen on out-of-fold predictions, and the accuracy reached on the held-out set.]]
+
 
 
 **Label audit.** At p of 0.9 or more, 39 of 1,415 training images (2.8 %) were flagged. The most frequent pairs were Hip to Pelvis (5), Wrist to Ankle (4) and Others to Chest (3). The Hip-to-Pelvis pattern mirrors the low Hip recall, which fits either label noise or a real boundary problem between the two classes. No clinician has reviewed any of the 39 suspects.
@@ -114,6 +122,10 @@ A linear probe on frozen DINOv2-S reached 0.8699 OOF and 0.8859 on the held-out 
 On the official MURA split the five-fold bagged ensemble reached an accuracy of 0.9747 [0.9663, 0.9818] and a macro-F1 of 0.9707 [0.9616, 0.9788]. Shah et al. (2026) report 0.9643 and 0.9574 on the same 3,197-image validation set, so the two results are comparable in data but not in method details.
  On COVID-19 Radiography (4 classes, image-level split) sample-F1 was 0.9647 [0.9595, 0.9697] and macro-F1 0.9681, and these numbers may be optimistic.
 Zero-shot transfer (Table 9) gave 0.875 to 0.880 from MURA to UNIFESP (n = 184) and 0.813 to 0.821 from UNIFESP to MURA (n = 12,000). From MURA to FracAtlas, restricted to hand and shoulder (1,281 of the 1,382 images are hand), accuracy was 0.691 with the softmax head and 0.858 with the sigmoid head. From UNIFESP to FracAtlas (hand, hip, leg, shoulder; n = 3,685) it was 0.708 and 0.698. Many FracAtlas JPEGs are truncated and were decoded only partly. Fig. {{mura}} summarises the MURA comparison (top) and the transfer results (bottom).
+[[TAB|t07_mura]]
+
+[[TAB|t09_transfer]]
+
 [[FIG|mura|c3_mura_transfer.png|(Top) Body-part accuracy on MURA (seven classes), compared with the models reported by Shah et al. (2026). (Bottom) Zero-shot accuracy through the class map, for the softmax and sigmoid heads; intervals come from an image-level bootstrap and are optimistic.]]
  Transfer is moderate and depends on the head, and the class maps are assumptions.
 

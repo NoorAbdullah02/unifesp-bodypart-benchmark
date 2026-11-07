@@ -1,7 +1,7 @@
 \setcounter{table}{3}
-\begin{table}[t]
-\centering\small
-\caption{Ablations (5 CV folds each, same held-out set; paired patient bootstrap vs. the reference)}\label{tab:ablation}
+\Needspace*{12\baselineskip}
+\begin{center}\small
+\captionof{table}{Ablations (5 CV folds each, same held-out set; paired patient bootstrap vs. the reference)}\label{tab:ablation}
 \resizebox{\textwidth}{!}{\begin{tabular}{lccccc}
 \toprule
 \textbf{config} & \textbf{held-out sample-F1 [95\% CI]} & \textbf{macro-F1} & \textbf{OOF - held-out} & \textbf{diff vs reference [95\% CI]} & \textbf{p} \\
@@ -24,4 +24,4 @@ swin\_3seeds\_average & 0.9137 [0.8623, 0.9574] & 0.848 & 0.0012 & 0.0049 [-0.00
 \bottomrule
 \end{tabular}}
 \par\smallskip{\footnotesize \texttt{OOF - held-out} large and positive = the validation score over-estimates (compare \texttt{\_leaky} with the patient-level reference for the split ablation).}
-\end{table}
+\end{center}
