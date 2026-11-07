@@ -4,7 +4,8 @@ from docx import Document
 from docx.shared import Pt, Inches, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
-md = open("MANUSCRIPT_v2.md", encoding="utf-8").read()
+import figlib
+md = figlib.process(open("MANUSCRIPT_v2.md", encoding="utf-8").read())[0]
 tables_md = open("results/paper_tables.md", encoding="utf-8").read()
 doc = Document()
 for s in doc.sections: s.left_margin = s.right_margin = Cm(2.2); s.top_margin = s.bottom_margin = Cm(2.2)
@@ -29,7 +30,7 @@ for line in body.split("\n"):
         _, num, fn, cap = line.strip("[]").split("|", 3)
         png = "figures/" + fn.replace(".pdf", ".png")
         if os.path.exists(png):
-            doc.add_picture(png, width=Inches(3.6 if fn.endswith("1.png") or "gradcam" in fn else 6.0)); doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+            doc.add_picture(png, width=Inches(3.6 if "gradcam" in fn else 6.0)); doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
             q = doc.add_paragraph(); rr = q.add_run("Fig. %s. " % num); rr.bold = True; q.add_run(cap)
         continue
     if line.startswith("## "): doc.add_heading(re.sub(r"^## \d* ?", "", line) if False else line[3:], 1)

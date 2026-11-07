@@ -79,7 +79,8 @@ open(f"{L}/tables/t15_dataset.tex", "w", encoding="utf-8").write(to_tex("Table 1
 for f in glob.glob("figures/*.png"): shutil.copy(f, f"{L}/figures/")
 for f in glob.glob("figures/gradcam_gallery_*.png"): shutil.copy(f, f"{L}/figures/")
 # ------------------------------------------------------------------ sections
-md = open("MANUSCRIPT_v2.md", encoding="utf-8").read(); md = md.split("\n---\n", 1)[1]; md = md.split("## Figures (files in")[0]
+import figlib
+md = open("MANUSCRIPT_v2.md", encoding="utf-8").read(); md = figlib.process(md)[0]; md = md.split("\n---\n", 1)[1]; md = md.split("## Figures (files in")[0]
 parts = re.split(r"\n(?=## )", md); fnames = {}
 for p in parts:
     m = re.match(r"## (.+)", p)
