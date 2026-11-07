@@ -1,5 +1,5 @@
 \section{Discussion}
-Evaluation mattered more than architecture here. Ensembling, fusion, heavy augmentation, extra seeds and pseudo-labelling each moved the held-out score by about 0.01 at most, none of them significantly, and seed noise was about as large. Papers that report differences of this size without intervals deserve some caution.
+Evaluation mattered more than architecture here. Ensembling, fusion, heavy augmentation, extra seeds and pseudo-labelling each moved the held-out score by about 0.01 at most, none of them significantly, and seed noise was about as large. Papers that report differences of this size without intervals deserve some caution. It is a less exciting finding than a new architecture, but we think it is the more useful one.
 
 Most errors sit in the rare classes (1 to 6 held-out positives) and in the heterogeneous "Others" class. The Hip-to-Pelvis cluster in the audit, and the competition hosts' offline re-annotation of the test set, suggest that label noise sets part of the ceiling, as Langer et al. (2024) found on a hospital dataset. The label-efficiency curve was still rising, so more labelled data would probably help more than a different architecture.
 
