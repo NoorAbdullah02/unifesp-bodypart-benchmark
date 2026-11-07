@@ -49,7 +49,7 @@ def to_tex(title, rows, note, label, fit=True):
     if fit: tab = "\\resizebox{\\textwidth}{!}{%s}" % tab
     cap = re.sub(r"^Table \d+\.\s*", "", title); num = int(re.match(r"Table (\d+)", title)[1])
     new = MAINMAP.get(num) or SUPPMAP[num]
-    return "\\setcounter{table}{%d}\n\\Needspace*{12\\baselineskip}\n\\begin{center}\\small\n\\captionof{table}{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{center}\n" % (new - 1, tex(cap), label, tab, tex(note))
+    return "\\setcounter{table}{%d}\n\\Needspace*{9\\baselineskip}\n\\begin{center}\\small\n\\captionof{table}{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{center}\n" % (new - 1, tex(cap), label, tab, tex(note))
 names = ["main", "runs", "kaggle", "ablation", "decoding", "gate", "mura", "covid", "transfer", "explain"]
 for i, (t, rows, note) in enumerate(md_tables("results/paper_tables.md")):
     open(f"{L}/tables/t{i+1:02d}_{names[i]}.tex", "w", encoding="utf-8").write(to_tex(t, rows, note, f"tab:{names[i]}"))
@@ -98,13 +98,13 @@ for p in parts:
             _, num, fn, cap = s.strip("[]").split("|", 3)
             W = {"fig1_protocol": 1.0, "fig10_heldout_overview": 0.8, "fig8_kaggle": 0.85, "r4_stage2": 0.7, "fig7_leakage_and_gate": 1.0, "fig2_ablation_forest": 0.9,
                  "fig5_foundation_models": 1.0, "fig4_reliability": 1.0, "r2_f1_vs_npos": 0.8, "fig3_per_class_recall": 0.85, "r3_label_audit": 0.8, "r5_confusions": 0.85,
-                 "fig9_mura": 0.85, "fig6_transfer": 0.9, "d1_examples": 1.0, "d2_classes_labels": 1.0, "d3_label_pairs": 0.8, "d4_split_composition": 0.85, "m1_architecture": 1.0, "c1_pairs_split": 0.78, "c2_audit_confusions": 0.82, "c3_mura_transfer": 0.85, "c4_kaggle_stage2": 0.8}
+                 "fig9_mura": 0.85, "fig6_transfer": 0.9, "d1_examples": 1.0, "d2_classes_labels": 1.0, "d3_label_pairs": 0.8, "d4_split_composition": 0.85, "m1_architecture": 1.0, "c1_pairs_split": 0.78, "c2_audit_confusions": 0.7, "c3_mura_transfer": 0.72, "c4_kaggle_stage2": 0.8}
             files = fn.split(";")
             if len(files) > 1:
                 body = "\\hfill".join("\\includegraphics[width=0.325\\textwidth]{%s}" % f for f in files)
             else:
                 body = "\\includegraphics[width=%s\\textwidth]{%s}" % (W.get(fn.rsplit(".", 1)[0], 0.7), fn)
-            pl = "H" if (len(files) > 1 or fn.startswith("c3_")) else "!htbp"
+            pl = "!htbp"
             out.append("\\begin{figure}[%s]\\centering%s\\caption{%s}\\label{fig:%s}\\end{figure}\\suppressfloats[t]" % (pl, body, tex(cap), num)); continue
         if s.startswith("[[TAB|"):
             out.append("\\input{tables/%s}" % s.strip("[]").split("|")[1]); continue

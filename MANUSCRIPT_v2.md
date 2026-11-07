@@ -112,10 +112,10 @@ A linear probe on frozen DINOv2-S reached 0.8699 OOF and 0.8859 on the held-out 
 
 
 
+[[FIG|audit|c2_audit_confusions.png|(Top) The pairs of given and suggested labels among the 39 suspected label errors. (Bottom) The most frequent misclassifications of the three explained models on the held-out set.]]
 **Label audit.** At p of 0.9 or more, 39 of 1,415 training images (2.8 %) were flagged. The most frequent pairs were Hip to Pelvis (5), Wrist to Ankle (4) and Others to Chest (3). The Hip-to-Pelvis pattern mirrors the low Hip recall, which fits either label noise or a real boundary problem between the two classes. No clinician has reviewed any of the 39 suspects.
 
 **Error analysis (Table 12).** In the three explained fold-0 models the most frequent held-out misses were Others labelled as Abdomen (6 to 8 images per model) and Others labelled as Pelvis (4 to 5), followed by Hip as Pelvis (2 per model) and Forearm as Lower Leg (2 per model). The heterogeneous "Others" class is mostly absorbed by large body regions. Fig. {{audit}} shows which label pairs the suspects fall into (top) and how the three explained models misclassify the held-out images (bottom).
-[[FIG|audit|c2_audit_confusions.png|(Top) The pairs of given and suggested labels among the 39 suspected label errors. (Bottom) The most frequent misclassifications of the three explained models on the held-out set.]]
 
 
 ### 5.8 Generalisation (Tables 7 to 9)

@@ -40,10 +40,10 @@ A linear probe on frozen DINOv2-S reached 0.8699 OOF and 0.8859 on the held-out 
 
 
 
+\begin{figure}[!htbp]\centering\includegraphics[width=0.7\textwidth]{c2_audit_confusions.png}\caption{(Top) The pairs of given and suggested labels among the 39 suspected label errors. (Bottom) The most frequent misclassifications of the three explained models on the held-out set.}\label{fig:11}\end{figure}\suppressfloats[t]
 \textbf{Label audit.} At p of 0.9 or more, 39 of 1,415 training images (2.8 \%) were flagged. The most frequent pairs were Hip to Pelvis (5), Wrist to Ankle (4) and Others to Chest (3). The Hip-to-Pelvis pattern mirrors the low Hip recall, which fits either label noise or a real boundary problem between the two classes. No clinician has reviewed any of the 39 suspects.
 
 \textbf{Error analysis (Supplementary Table S6).} In the three explained fold-0 models the most frequent held-out misses were Others labelled as Abdomen (6 to 8 images per model) and Others labelled as Pelvis (4 to 5), followed by Hip as Pelvis (2 per model) and Forearm as Lower Leg (2 per model). The heterogeneous "Others" class is mostly absorbed by large body regions. Fig. 11 shows which label pairs the suspects fall into (top) and how the three explained models misclassify the held-out images (bottom).
-\begin{figure}[!htbp]\centering\includegraphics[width=0.82\textwidth]{c2_audit_confusions.png}\caption{(Top) The pairs of given and suggested labels among the 39 suspected label errors. (Bottom) The most frequent misclassifications of the three explained models on the held-out set.}\label{fig:11}\end{figure}\suppressfloats[t]
 
 
 \subsection{Generalisation (Table 5 to Table 6)}
@@ -54,12 +54,12 @@ Zero-shot transfer (Table 6) gave 0.875 to 0.880 from MURA to UNIFESP (n = 184) 
 
 \input{tables/t09_transfer}
 
-\begin{figure}[H]\centering\includegraphics[width=0.85\textwidth]{c3_mura_transfer.png}\caption{(Top) Body-part accuracy on MURA (seven classes), compared with the models reported by Shah et al. (2026). (Bottom) Zero-shot accuracy through the class map, for the softmax and sigmoid heads; intervals come from an image-level bootstrap and are optimistic.}\label{fig:12}\end{figure}\suppressfloats[t]
+\begin{figure}[!htbp]\centering\includegraphics[width=0.72\textwidth]{c3_mura_transfer.png}\caption{(Top) Body-part accuracy on MURA (seven classes), compared with the models reported by Shah et al. (2026). (Bottom) Zero-shot accuracy through the class map, for the softmax and sigmoid heads; intervals come from an image-level bootstrap and are optimistic.}\label{fig:12}\end{figure}\suppressfloats[t]
  Transfer is moderate and depends on the head, and the class maps are assumptions.
 
 \subsection{Explainability (Supplementary Table S5)}
 For all three models, deleting the most salient pixels first removed class evidence faster than deleting a random block of the same size (gain 0.284 [0.252, 0.316] for ConvNeXt-T, 0.204 for ResNet50, 0.164 for Swin-T). The maps were uncorrelated with those of randomly initialised networks for ConvNeXt-T and Swin-T (rho 0.11 and 0.02). ResNet50 differed too, but with a systematic negative correlation (rho -0.31). The feature grids are coarse (7 $\times$ 7 to 8 $\times$ 8), there is no localisation ground truth and no radiologist reviewed the maps. We therefore describe them as faithful to the model, not as clinically valid (Fig. 13).
-\begin{figure}[H]\centering\includegraphics[width=0.325\textwidth]{gradcam_gallery_1.png}\hfill\includegraphics[width=0.325\textwidth]{gradcam_gallery_2.png}\hfill\includegraphics[width=0.325\textwidth]{gradcam_gallery_3.png}\caption{Grad-CAM galleries for ConvNeXt-T (left), ResNet50 (middle) and Swin-T (right). For each class there is one correct and one missed held-out image, with the map for the true class and for the predicted class.}\label{fig:13}\end{figure}\suppressfloats[t]
+\begin{figure}[!htbp]\centering\includegraphics[width=0.325\textwidth]{gradcam_gallery_1.png}\hfill\includegraphics[width=0.325\textwidth]{gradcam_gallery_2.png}\hfill\includegraphics[width=0.325\textwidth]{gradcam_gallery_3.png}\caption{Grad-CAM galleries for ConvNeXt-T (left), ResNet50 (middle) and Swin-T (right). For each class there is one correct and one missed held-out image, with the map for the true class and for the predicted class.}\label{fig:13}\end{figure}\suppressfloats[t]
 
 
 
