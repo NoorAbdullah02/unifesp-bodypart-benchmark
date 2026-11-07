@@ -21,4 +21,4 @@ Suggested reviewers: [to be chosen by the authors; none suggested here].
 Sincerely,
 Sheikh Noor Abdullah and A.B.M. Kabir Hossain
 Department of Information and Communication Engineering, Bangladesh Army University of Engineering & Technology (BAUET), Qadirabad Cantonment, Natore, Bangladesh
-sheikhnoorabdullah02@gmail.com; kabir111192@gmail.com corresponding author: Sheikh Noor Abdullah; ORCID of S.N. Abdullah: 0009-0002-7193-4284
+sheikhnoorabdullah02@gmail.com corresponding author: Sheikh Noor Abdullah; ORCID of S.N. Abdullah: 0009-0002-7193-4284

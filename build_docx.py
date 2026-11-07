@@ -22,7 +22,11 @@ body, _, figs = md.partition("## Figures (files in")
 body = body.split("\n---\n", 1)[1] if "\n---\n" in body else body       # drop the working-status header
 title = "How reliable are radiograph body-part classifiers? A leakage-controlled, cross-dataset benchmark with reliability and label-quality analysis on public data"
 h = doc.add_heading(title, 0); h.alignment = WD_ALIGN_PARAGRAPH.LEFT
-p = doc.add_paragraph(); r = p.add_run("[Author names, affiliations, corresponding author, ORCID - to be completed]"); r.italic = True
+p = doc.add_paragraph(); r = p.add_run("Sheikh Noor Abdullah"); r.bold = True; p.add_run("1,*, ")
+r = p.add_run("A.B.M. Kabir Hossain"); r.bold = True; p.add_run("1")
+a = doc.add_paragraph(); a.add_run("1 Department of Information and Communication Engineering, Bangladesh Army University of Engineering & Technology (BAUET), Qadirabad Cantonment, Natore, Bangladesh").italic = True
+c = doc.add_paragraph(); c.add_run("* Corresponding author: sheikhnoorabdullah02@gmail.com. ORCID: 0009-0002-7193-4284").italic = True
+body = body.split("\n## References")[0]
 for line in body.split("\n"):
     line = line.rstrip()
     if not line.strip() or line.strip() == "---": continue
@@ -64,4 +68,12 @@ for line in body.split("\n"):
     elif re.match(r"^\* ", line): runs(doc.add_paragraph(style="List Bullet"), line[2:])
     elif re.match(r"^\d+\. ", line): runs(doc.add_paragraph(style="List Number"), re.sub(r"^\d+\. ", "", line))
     else: runs(doc.add_paragraph(), line)
+doc.add_heading("References", 1)
+def deltex(t):
+    t = re.sub(r"\\textit\{([^}]*)\}", r"\1", t); t = re.sub(r"\\url\{([^}]*)\}", r"\1", t)
+    t = t.replace("{\\\"u}", "ü").replace("{\\~a}", "ã").replace("\\,", "").replace("--", "–").replace("\\&", "&").replace("\\%", "%")
+    return re.sub(r"[{}]", "", t)
+for blk in open("latex/references.tex", encoding="utf-8").read().split("\\bibitem")[1:]:
+    txt = blk.split("\n", 1)[1].split("\\end{thebibliography}")[0].strip()
+    pp = doc.add_paragraph(deltex(txt)); pp.paragraph_format.left_indent = Cm(0.8); pp.paragraph_format.first_line_indent = Cm(-0.8)
 doc.save("submission/manuscript.docx"); print("wrote submission/manuscript.docx")
