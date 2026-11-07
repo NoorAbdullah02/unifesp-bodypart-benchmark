@@ -1,7 +1,7 @@
 \setcounter{table}{2}
 \begin{table}[!ht]\centering\small
 \caption{Stage 2: out-of-fold results on all 1,738 training images and Kaggle late-submission scores}\label{tab:stage2}
-\resizebox{\textwidth}{!}{\begin{tabular}{lcccc}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{\begin{tabular}{p{0.38\textwidth}cccc}
 \toprule
 \textbf{ensemble} & \textbf{OOF sample-F1 [95\% CI]} & \textbf{macro-F1} & \textbf{subset acc.} & \textbf{Kaggle private / public} \\
 \midrule

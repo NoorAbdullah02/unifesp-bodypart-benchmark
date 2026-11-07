@@ -21,8 +21,9 @@ import os
 
 import pandas as pd
 
-LB = [("#1 Harshit Sheoran", 0.93378), ("#2 JGK (ResNet50/152, FastAI)", 0.92787), ("#3 Colin Greeley", 0.92488),
-      ("#4 KobeU Systems Medicine", 0.92414), ("#5 wangkui", 0.92182)]      # private leaderboard read from kaggle.com, Nov 2026
+NICE = {"efficientnetv2_s_s256": "EfficientNetV2-S", "convnext_tiny_s256": "ConvNeXt-T", "resnet50_s256_heavy": "ResNet50 (heavy augmentation)", "efficientnet_b3_s256_hv": "EfficientNet-B3"}
+LB = [("1st place", 0.93378), ("2nd place (ResNet50/152, FastAI)", 0.92787), ("3rd place", 0.92488),
+      ("4th place", 0.92414), ("5th place", 0.92182)]      # private leaderboard read from kaggle.com, Nov 2026
 SHAH = [("Xception-Swin (Shah 2026)", 0.9643, 0.9574), ("DenseNet-201", 0.9187, 0.9093), ("EfficientNet-B0", 0.9043, 0.8952),
         ("ResNet-101", 0.8934, 0.8831), ("VGG-19", 0.8612, 0.8498)]            # Shah et al. 2026, J Imaging 12(7):298 (their test = MURA valid)
 
@@ -84,8 +85,8 @@ def build(root):
                      "macro_F1": f"{b['macro_f1']:.4f}", "micro_F1": f"{b['micro_f1']:.4f}", "subset_acc": f"{b['subset_accuracy']:.4f}"})
         p = h["paired_ens_vs_single_sample_f1"]
         note = (f"Held-out set: {h['n_images']} images / {h['n_patients']} patients; 95 % CIs by patient-level bootstrap. Ensemble minus best single: "
-                f"{p['diff']:+.4f} [{p['ci_low']:+.4f}, {p['ci_high']:+.4f}], p = {p['p_value']:.3f}. Ensemble weights (OOF, Caruana): "
-                + ", ".join(f"{k} {v:.2f}" for k, v in r['weights'].items() if v > 0) + ".")
+                f"{p['diff']:+.4f} [{p['ci_low']:+.4f}, {p['ci_high']:+.4f}], p = {p['p_value']:.3f}. Ensemble weights fitted on OOF predictions (Caruana selection; the other two runs, Swin-T and DenseNet121, received weight 0): "
+                + ", ".join(f"{NICE.get(k, k)} {v:.2f}" for k, v in r['weights'].items() if v > 0) + ".")
         add("Table 1. UNIFESP held-out performance (decisions made on out-of-fold predictions only)", pd.DataFrame(rows), note)
     else:
         skipped.append("main_results.json")
@@ -99,7 +100,7 @@ def build(root):
 
     # 3. Kaggle comparison -------------------------------------------------------------------------
     sc = load_json(root, "scores.json")
-    rows = [{"entry": n, "private_score": f"{v:.5f}", "public_score": ""} for n, v in LB]
+    rows = [{"entry": n, "private_score": f"{v:.5f}", "public_score": "n/a"} for n, v in LB]
     if sc:
         for k, lab in (("stage1", "ours: stage-1 ensemble"), ("s2a", "ours: stage-2a all-data"), ("s2b", "ours: stage-2b +pseudo-labels"), ("s2u", "ours: stage-2 union")):
             if k in sc:

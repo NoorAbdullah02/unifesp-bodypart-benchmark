@@ -127,7 +127,7 @@ b.set_xticks(range(3)); b.set_xticklabels(list(nm.values()), fontsize=8.5); b.se
 save(fig, "fig7_leakage_and_gate", axes=ax)
 
 # ---------- Fig 8: Kaggle
-names = ["#1 Harshit Sheoran", "#2 JGK", "ours: Stage 2 (s2u)", "ours: Stage 1", "#3 Colin Greeley", "#4 KobeU", "#5 wangkui"]; sc = np.array([0.93378, 0.92787, 0.92638, 0.92563, 0.92488, 0.92414, 0.92182])
+names = ["1st place", "2nd place", "ours: Stage 2 (s2u)", "ours: Stage 1", "3rd place", "4th place", "5th place"]; sc = np.array([0.93378, 0.92787, 0.92638, 0.92563, 0.92488, 0.92414, 0.92182])
 fig, ax = plt.subplots(figsize=(7.2, 3.8)); y = np.arange(len(sc))[::-1]; col = [GREY, GREY, NAVY, TEAL, GREY, GREY, GREY]
 ax.hlines(y, 0.921, sc, color="#CBD5E1", lw=2.4); ax.scatter(sc, y, s=[80 if "ours" in n else 55 for n in names], c=col, zorder=3, edgecolor="white", linewidth=1.2)
 for yi, s_, n in zip(y, sc, names): ax.text(0.9337 if False else s_ + 0.0004, yi + 0.0, f" {s_:.5f}", va="center", fontsize=8.5, color=INK, fontweight="bold" if "ours" in n else "normal")

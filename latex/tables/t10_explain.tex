@@ -1,7 +1,7 @@
 \setcounter{table}{4}
 \begin{table}[!ht]\centering\small
 \caption{Explainability: faithfulness (deletion test) and randomisation sanity check of Grad-CAM on the held-out set}\label{tab:explain}
-\resizebox{\textwidth}{!}{\begin{tabular}{lcccccccccc}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{\begin{tabular}{lcccccccccc}
 \toprule
 \textbf{model} & \textbf{target layer} & \textbf{holdout sample F1(blend)} & \textbf{pairs} & \textbf{deletion CAM} & \textbf{deletion random grid} & \textbf{gain [95\% CI]} & \textbf{rho trained-vs-random} & \textbf{frac} & \textbf{rho} & \textbf{<0.3} \\
 \midrule

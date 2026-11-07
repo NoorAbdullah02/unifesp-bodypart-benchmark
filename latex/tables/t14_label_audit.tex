@@ -1,7 +1,7 @@
 \setcounter{table}{7}
 \begin{table}[!ht]\centering\small
 \caption{Suspected label errors in the training pool (out-of-fold, 39 of 1,415 images, 2.8 \%)}\label{tab:audit}
-\resizebox{\textwidth}{!}{\begin{tabular}{lcc}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{\begin{tabular}{p{0.64\textwidth}cc}
 \toprule
 \textbf{given label} & \textbf{model says (p >= 0.9)} & \textbf{n} \\
 \midrule

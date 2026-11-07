@@ -1,7 +1,7 @@
 \setcounter{table}{1}
 \begin{table}[!ht]\centering\small
 \caption{Decoding ablation and evaluation leakage}\label{tab:decoding}
-\resizebox{\textwidth}{!}{\begin{tabular}{lcc}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{\begin{tabular}{p{0.64\textwidth}cc}
 \toprule
 \textbf{decoding} & \textbf{held-out sample-F1 [95\% CI]} & \textbf{macro-F1} \\
 \midrule

@@ -1,7 +1,7 @@
 \setcounter{table}{0}
 \begin{table}[!ht]\centering\small
 \caption{Single runs (head/TTA variant chosen on OOF)}\label{tab:runs}
-\resizebox{\textwidth}{!}{\begin{tabular}{lccc}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{\begin{tabular}{p{0.51\textwidth}ccc}
 \toprule
 \textbf{run} & \textbf{chosen variant} & \textbf{oof chosen variant} & \textbf{holdout sample mean f1 0.5 min one} \\
 \midrule

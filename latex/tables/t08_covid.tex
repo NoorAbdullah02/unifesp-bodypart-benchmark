@@ -1,7 +1,7 @@
 \setcounter{table}{3}
 \begin{table}[!ht]\centering\small
 \caption{COVID-19 Radiography (4 classes, image-level split)}\label{tab:covid}
-\resizebox{\textwidth}{!}{\begin{tabular}{lccc}
+\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{\begin{tabular}{p{0.51\textwidth}ccc}
 \toprule
 \textbf{held-out images} & \textbf{sample-F1 [95\% CI]} & \textbf{macro-F1 [95\% CI]} & \textbf{subset acc} \\
 \midrule

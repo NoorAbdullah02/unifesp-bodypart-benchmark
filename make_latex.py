@@ -41,7 +41,7 @@ def md_tables(path):
         out.append((title, rows, note))
     return out
 def to_tex(title, rows, note, label, fit=True):
-    n = len(rows[0]); spec = "l" + "".join("c" for _ in range(n - 1))
+    n = len(rows[0]); wide = n >= 6; spec = ("l" if wide else "p{%.2f\\textwidth}" % (0.9 - 0.13 * (n - 1))) + "".join("c" for _ in range(n - 1))
     HM = {"sample_mean_F1": "sample-mean F1", "macro_F1": "macro-F1", "micro_F1": "micro-F1", "macro_f1": "macro-F1", "subset_acc": "subset acc.", "ci": "95 % CI", "private_score": "private score", "public_score": "public score"}
     hd = [HM.get(h, h.replace("_", " ")) for h in rows[0]]
     rows = [rows[0]] + [[("0.0000" if c in ("-0.0", "-0.0000") else c) for c in r] for r in rows[1:]]
@@ -49,7 +49,7 @@ def to_tex(title, rows, note, label, fit=True):
     for r in rows[1:]: body += " & ".join(esc(c).replace("->", r"$\rightarrow$") for c in (r + [""] * n)[:n]) + " \\\\\n"
     body += "\\bottomrule\n"
     tab = "\\begin{tabular}{%s}\n%s\\end{tabular}" % (spec, body)
-    if fit: tab = "\\resizebox{\\textwidth}{!}{%s}" % tab
+    if fit: tab = "\\resizebox{\\ifdim\\width>\\textwidth\\textwidth\\else\\width\\fi}{!}{%s}" % tab
     cap = re.sub(r"^Table \d+\.\s*", "", title); num = int(re.match(r"Table (\d+)", title)[1])
     new = MAINMAP.get(num) or SUPPMAP[num]
     return "\\setcounter{table}{%d}\n\\begin{table}[!ht]\\centering\\small\n\\caption{%s}\\label{%s}\n%s\n\\par\\smallskip{\\footnotesize %s}\n\\end{table}\n" % (new - 1, tex(cap), label, tab, tex(note))
@@ -115,6 +115,7 @@ for p in parts:
         if s.startswith("* ") or re.match(r"^\d+\. ", s):
             out.append("\\begin{itemize}\\item " + tex(re.sub(r"^(\* |\d+\. )", "", s)) + "\\end{itemize}"); continue
         out.append(tex(s))
+        if key != "abstract": out.append("")
     txt = "\n".join(out).replace("\\end{itemize}\n\\begin{itemize}", "")
     if key == "abstract": txt = "\n".join(l for l in txt.split("\n") if not l.startswith("\\textbf{Keywords"))
     open(f"{L}/sections/{key}.tex", "w", encoding="utf-8").write(("\\section{%s}\n" % tex(re.sub(r"^\d+\s*", "", head)) if key not in ("abstract",) else "") + txt + "\n"); fnames[key] = head

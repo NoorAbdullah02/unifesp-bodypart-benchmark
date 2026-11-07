@@ -9,7 +9,7 @@
 | ensemble, per-class thresholds tuned on OOF + min-one | 0.9189 [0.8669, 0.9602] | 0.8630 [0.6891, 0.8916] | 0.9148 | 0.8885 |
 | best single run by OOF (convnext_tiny_s256), 0.5 + min-one | 0.9123 | 0.8482 | 0.9070 | 0.8762 |
 
-_Held-out set: 323 images / 156 patients; 95 % CIs by patient-level bootstrap. Ensemble minus best single: +0.0066 [-0.0002, +0.0142], p = 0.063. Ensemble weights (OOF, Caruana): efficientnetv2_s_s256 0.10, convnext_tiny_s256 0.27, resnet50_s256_heavy 0.29, efficientnet_b3_s256_hv 0.34._
+_Held-out set: 323 images / 156 patients; 95 % CIs by patient-level bootstrap. Ensemble minus best single: +0.0066 [-0.0002, +0.0142], p = 0.063. Ensemble weights fitted on OOF predictions (Caruana selection; the other two runs, Swin-T and DenseNet121, received weight 0): EfficientNetV2-S 0.10, ConvNeXt-T 0.27, ResNet50 (heavy augmentation) 0.29, EfficientNet-B3 0.34._
 
 ## Table 2. Single runs (head/TTA variant chosen on OOF)
 
@@ -28,15 +28,15 @@ _OOF = pooled out-of-fold sample-mean F1 of the chosen variant is in the full CS
 
 | entry | private_score | public_score |
 |---|---|---|
-| #1 Harshit Sheoran | 0.93378 |  |
-| #2 JGK (ResNet50/152, FastAI) | 0.92787 |  |
+| 1st place | 0.93378 | n/a |
+| 2nd place (ResNet50/152, FastAI) | 0.92787 | n/a |
 | ours: stage-2 union (late submission) | 0.92638 | 0.93378 |
 | ours: stage-1 ensemble (late submission) | 0.92563 | 0.92704 |
-| #3 Colin Greeley | 0.92488 |  |
-| #4 KobeU Systems Medicine | 0.92414 |  |
-| #5 wangkui | 0.92182 |  |
+| 3rd place | 0.92488 | n/a |
+| 4th place | 0.92414 | n/a |
+| 5th place | 0.92182 | n/a |
 
-_Mean F1 (sample-wise); private score uses ~60 % of the test set with the original (partly noisy) labels, so differences of ~0.003 are within noise. Late submissions are not listed on the leaderboard; we report every submission we made._
+_Mean F1 (sample-wise); private score uses ~60 % of the test set with the original (partly noisy) labels, so differences of ~0.003 are within noise. Late submissions are not listed on the leaderboard; we report every submission we made. Public scores of other teams are not shown (n/a)._
 
 ## Table 4. Ablations (5 CV folds each, same held-out set; paired patient bootstrap vs. the reference)
 

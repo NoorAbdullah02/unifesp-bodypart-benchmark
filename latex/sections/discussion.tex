@@ -1,7 +1,12 @@
 \section{Discussion}
 Evaluation mattered more than architecture here. Ensembling, fusion, heavy augmentation, extra seeds and pseudo-labelling each moved the held-out score by about 0.01 at most, none of them significantly, and seed noise was about as large. Papers that report differences of this size without intervals deserve some caution.
+
 Most errors sit in the rare classes (1 to 6 held-out positives) and in the heterogeneous "Others" class. The Hip-to-Pelvis cluster in the audit, and the competition hosts' offline re-annotation of the test set, suggest that label noise sets part of the ceiling, as Langer et al. (2024) found on a hospital dataset. The label-efficiency curve was still rising, so more labelled data would probably help more than a different architecture.
+
 We did not test why the gate collapsed. One possibility is that a gate learned on the raw features of two networks with different activation scales lets one branch dominate. The learned weights point to a degenerate solution, not to complementary fusion, and fixed averaging was no worse.
+
 For clinical use, a router that answers 90 \% of the images keeps 94.5 \% top-1 accuracy and sends the other 10 \% to a person. The operating point chosen on OOF predictions should be re-validated on local data before anyone relies on it. We see the classifier as a way to flag suspicious metadata, not as a replacement for it.
-Our MURA accuracy is higher than the one published figure we found for this task. Other studies report 97 to 99 \% on other data and with much larger private training sets (Langer et al. 2024; Mitsuyama et al. 2026), and we do not claim to outperform them.
+
+Our MURA accuracy is higher than the one published figure we found for this task. Other studies report 97 to 99 \% on other data and with much larger private training sets (Langer et al., 2024; Mitsuyama et al., 2026), and we do not claim to outperform them.
+
 
