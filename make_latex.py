@@ -97,14 +97,14 @@ for p in parts:
         if s.startswith("[[FIG|"):
             _, num, fn, cap = s.strip("[]").split("|", 3)
             W = {"fig1_protocol": 1.0, "fig10_heldout_overview": 0.8, "fig8_kaggle": 0.85, "r4_stage2": 0.7, "fig7_leakage_and_gate": 1.0, "fig2_ablation_forest": 0.9,
-                 "fig5_foundation_models": 1.0, "fig4_reliability": 1.0, "r2_f1_vs_npos": 0.8, "fig3_per_class_recall": 0.85, "r3_label_audit": 0.8, "r5_confusions": 0.85,
+                 "fig5_foundation_models": 1.0, "fig4_reliability": 0.8, "r2_f1_vs_npos": 0.8, "fig3_per_class_recall": 0.85, "r3_label_audit": 0.8, "r5_confusions": 0.85,
                  "fig9_mura": 0.85, "fig6_transfer": 0.9, "d1_examples": 1.0, "d2_classes_labels": 1.0, "d3_label_pairs": 0.8, "d4_split_composition": 0.85, "m1_architecture": 1.0, "c1_pairs_split": 0.78, "c2_audit_confusions": 0.7, "c3_mura_transfer": 0.72, "c4_kaggle_stage2": 0.8}
             files = fn.split(";")
             if len(files) > 1:
                 body = "\\hfill".join("\\includegraphics[width=0.325\\textwidth]{%s}" % f for f in files)
             else:
                 body = "\\includegraphics[width=%s\\textwidth]{%s}" % (W.get(fn.rsplit(".", 1)[0], 0.7), fn)
-            pl = "!htbp"
+            pl = "t"
             out.append("\\begin{figure}[%s]\\centering%s\\caption{%s}\\label{fig:%s}\\end{figure}\\suppressfloats[t]" % (pl, body, tex(cap), num)); continue
         if s.startswith("[[TAB|"):
             out.append("\\input{tables/%s}" % s.strip("[]").split("|")[1]); continue
