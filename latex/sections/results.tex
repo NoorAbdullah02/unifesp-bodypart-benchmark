@@ -46,7 +46,7 @@ A linear probe on frozen DINOv2-S reached 0.8699 OOF and 0.8859 on the held-out 
 \textbf{Error analysis (Supplementary Table S6).} In the three explained fold-0 models the most frequent held-out misses were Others labelled as Abdomen (6 to 8 images per model) and Others labelled as Pelvis (4 to 5), followed by Hip as Pelvis (2 per model) and Forearm as Lower Leg (2 per model). The heterogeneous "Others" class is mostly absorbed by large body regions. Fig. 11 shows which label pairs the suspects fall into (top) and how the three explained models misclassify the held-out images (bottom).
 
 
-\subsection{Generalisation (Table 5 to Table 6)}
+\subsection{Generalisation (Table 5 and Table 6; Supplementary Table S4)}
 On the official MURA split the five-fold bagged ensemble reached an accuracy of 0.9747 [0.9663, 0.9818] and a macro-F1 of 0.9707 [0.9616, 0.9788]. Shah et al. (2026) report 0.9643 and 0.9574 on the same 3,197-image validation set, so the two results are comparable in data but not in method details.
  On COVID-19 Radiography (4 classes, image-level split) sample-F1 was 0.9647 [0.9595, 0.9697] and macro-F1 0.9681, and these numbers may be optimistic.
 Zero-shot transfer (Table 6) gave 0.875 to 0.880 from MURA to UNIFESP (n = 184) and 0.813 to 0.821 from UNIFESP to MURA (n = 12,000). From MURA to FracAtlas, restricted to hand and shoulder (1,281 of the 1,382 images are hand), accuracy was 0.691 with the softmax head and 0.858 with the sigmoid head. From UNIFESP to FracAtlas (hand, hip, leg, shoulder; n = 3,685) it was 0.708 and 0.698. Many FracAtlas JPEGs are truncated and were decoded only partly. Fig. 12 summarises the MURA comparison (top) and the transfer results (bottom).
