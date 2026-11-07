@@ -1,5 +1,7 @@
 # unifesp-bodypart-benchmark
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24027438.svg)](https://doi.org/10.5281/zenodo.24027438)
+
 **How reliable are radiograph body-part classifiers?** A leakage-controlled, cross-dataset benchmark with reliability and label-quality analysis on public data.
 
 Authors: Sheikh Noor Abdullah (first author), A.B.M. Kabir Hossain. Department of Information and Communication Engineering, Bangladesh Army University of Engineering & Technology (BAUET), Natore, Bangladesh.
