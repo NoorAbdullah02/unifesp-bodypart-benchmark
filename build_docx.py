@@ -40,9 +40,12 @@ for line in body.split("\n"):
         continue
     if line.startswith("[[TAB|"):
         key = line.strip("[]").split("|")[1]
-        mp = {"t01_main": (1, 1), "t03_kaggle": (3, 2), "t11_stage2": (11, 3), "t04_ablation": (4, 4), "t07_mura": (7, 5), "t09_transfer": (9, 6)}
+        mp = {"t16_literature": (16, 1), "t01_main": (1, 2), "t03_kaggle": (3, 3), "t11_stage2": (11, 4), "t04_ablation": (4, 5), "t07_mura": (7, 6), "t09_transfer": (9, 7)}
         old, new = mp[key]
-        if old == 11:
+        if old == 16:
+            from lit_table import LIT_TITLE, LIT_HEAD, LIT_ROWS, LIT_NOTE
+            title = LIT_TITLE.split(". ", 1)[1]; rows = [LIT_HEAD] + LIT_ROWS; note = LIT_NOTE
+        elif old == 11:
             title = "Stage 2: out-of-fold results on all 1,738 training images and Kaggle late-submission scores"
             rows = [["ensemble", "OOF sample-F1 [95% CI]", "macro-F1", "subset acc.", "Kaggle private / public"],
                     ["s2a: 8 models, no pseudo-labels", "0.9262 [0.9092, 0.9414]", "0.8749", "0.8867", "not submitted"],

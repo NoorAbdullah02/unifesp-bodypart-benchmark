@@ -1,0 +1,14 @@
+"""Comparison table for the Related work section (used by make_latex.py and build_docx.py). '-' = not reported in the abstract or the parts of the paper we read."""
+LIT_TITLE = "Table 16. Studies of body-part or anatomy classification, and what each reports"
+LIT_HEAD = ["study", "images and classes", "data", "split unit", "label review", "external data", "calib."]
+LIT_ROWS = [
+ ["Pham et al. (2021)", "16,093 radiographs, 5 coarse groups", "public", "-", "-", "-", "-"],
+ ["Langer et al. (2024, preprint)", "48,434 radiographs, 14 regions", "hospital", "-", "experts reviewed test errors", "-", "-"],
+ ["Mitsuyama et al. (2026)", "429,341 radiographs, 7 categories", "2 sites", "-", "radiologists corrected tags", "second institution, MURA", "-"],
+ ["Krishnan and Padmavathi (2025)", "UNIFESP, 22 classes, single label", "public", "not described", "-", "-", "-"],
+ ["Shah et al. (2026)", "MURA, 7 study types", "public", "patient-wise", "-", "-", "-"],
+ ["Fink et al. (2024)", "musculoskeletal radiographs, projection and side", "-", "patient", "-", "-", "-"],
+ ["Raffy et al. (2023)", "CT and MRI, 17 and 18 regions", "-", "-", "-", "27 institutions", "-"],
+ ["This work", "UNIFESP 22 classes (multilabel), MURA 7 classes, FracAtlas, COVID-19", "public only", "patient, nested", "audit of 39 suspects (no clinician)", "MURA, FracAtlas, UNIFESP", "ECE, risk-coverage"],
+]
+LIT_NOTE = "calib. = calibration or selective prediction; 2 sites = two institutions. A dash means the item was not reported in the abstract or in the parts of the paper we read; we did not check every full text, so a dash is not proof of absence."

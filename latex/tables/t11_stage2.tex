@@ -1,4 +1,4 @@
-\setcounter{table}{2}
+\setcounter{table}{3}
 \begin{table}[!ht]\centering\small
 \caption{Stage 2: out-of-fold results on all 1,738 training images and Kaggle late-submission scores}\label{tab:stage2}
 \resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{\begin{tabular}{p{0.38\textwidth}cccc}
@@ -12,5 +12,5 @@ difference s2u - s2a & +0.0017 [-0.0010, +0.0046], p = 0.25 &  &  &  \\
 difference s2b - s2a & -0.0029 [-0.0092, +0.0034], p = 0.36 &  &  &  \\
 \bottomrule
 \end{tabular}}
-\par\smallskip{\footnotesize OOF numbers are not comparable with the held-out numbers of Table 1 (different protocol: no fixed held-out set). Ensemble weights are fitted on the same OOF predictions, so the union estimate is optimistic. CIs: patient-level bootstrap (2,000 resamples); pseudo-labels use unlabelled test images (transductive).}
+\par\smallskip{\footnotesize OOF numbers are not comparable with the held-out numbers of Table 2 (different protocol: no fixed held-out set). Ensemble weights are fitted on the same OOF predictions, so the union estimate is optimistic. CIs: patient-level bootstrap (2,000 resamples); pseudo-labels use unlabelled test images (transductive).}
 \end{table}

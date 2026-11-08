@@ -5,7 +5,7 @@ import pandas as pd, numpy as np
 L = "latex"; [os.makedirs(f"{L}/{d}", exist_ok=True) for d in ("tables", "figures", "sections")]
 ESC = {"\\": r"\textbackslash{}", "&": r"\&", "%": r"\%", "$": r"\$", "#": r"\#", "_": r"\_", "{": r"\{", "}": r"\}", "~": r"\textasciitilde{}", "^": r"\^{}"}
 def esc(s): return "".join(ESC.get(c, c) for c in s)
-MAINMAP = {1: 1, 3: 2, 11: 3, 4: 4, 7: 5, 9: 6}
+MAINMAP = {16: 1, 1: 2, 3: 3, 11: 4, 4: 5, 7: 6, 9: 7}
 SUPPMAP = {2: 1, 5: 2, 6: 3, 8: 4, 10: 5, 12: 6, 13: 7, 14: 8, 15: 9}
 MAIN = set(MAINMAP)
 def fixref(s):
@@ -57,6 +57,13 @@ names = ["main", "runs", "kaggle", "ablation", "decoding", "gate", "mura", "covi
 for i, (t, rows, note) in enumerate(md_tables("results/paper_tables.md")):
     open(f"{L}/tables/t{i+1:02d}_{names[i]}.tex", "w", encoding="utf-8").write(to_tex(t, rows, note, f"tab:{names[i]}"))
 # extra tables ------------------------------------------------------
+from lit_table import LIT_TITLE, LIT_HEAD, LIT_ROWS, LIT_NOTE
+W16 = [0.15, 0.19, 0.10, 0.09, 0.13, 0.12, 0.08]
+spec16 = "@{}" + "".join(">{\\raggedright\\arraybackslash}p{%.2f\\textwidth}" % w for w in W16) + "@{}"
+body16 = "\\toprule\n" + " & ".join(r"\textbf{%s}" % esc(h) for h in LIT_HEAD) + " \\\\\n\\midrule\n"
+for r16 in LIT_ROWS: body16 += " & ".join(esc(c) for c in r16) + " \\\\\n"
+body16 += "\\bottomrule\n"
+open(f"{L}/tables/t16_literature.tex", "w", encoding="utf-8").write("\\setcounter{table}{0}\n\\begin{table}[!ht]\\centering\n\\caption{%s}\\label{tab:literature}\n{\\footnotesize\\setlength{\\tabcolsep}{3pt}\\begin{tabular}{%s}\n%s\\end{tabular}}\n\\par\\smallskip{\\footnotesize %s}\n\\end{table}\n" % (tex(LIT_TITLE.split(". ", 1)[1]), spec16, body16, tex(LIT_NOTE)))
 ci = json.load(open("results/stage2/stage2_ci.json"))
 rows = [["ensemble", "OOF sample-F1 [95% CI]", "macro-F1", "subset acc.", "Kaggle private / public"],
         ["s2a: 8 models, no pseudo-labels", "0.9262 [0.9092, 0.9414]", "0.8749", "0.8867", "not submitted"],
