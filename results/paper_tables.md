@@ -95,7 +95,7 @@ _hybrid_avg is fixed at 0.5; hybrid_cnn / hybrid_swin are 1 / 0 by construction.
 | ResNet-101 | 0.8934 (CI n/a) | 0.8831 (CI n/a) |
 | VGG-19 | 0.8612 (CI n/a) | 0.8498 (CI n/a) |
 
-_Shah et al. 2026 (Table 8; verified in the full text): same MURA validation set (3,197 images), fixed seed 42, image-level evaluation; no CI is shown for these body-part numbers._
+_Shah et al. 2026 (results table in their paper; verified in the full text): same MURA validation set (3,197 images), fixed seed 42, image-level evaluation; no CI is shown for these body-part numbers._
 
 ## Table 8. COVID-19 Radiography (4 classes, image-level split)
 

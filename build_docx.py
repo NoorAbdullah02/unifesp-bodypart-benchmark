@@ -5,7 +5,8 @@ from docx.shared import Pt, Inches, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
 import figlib
-md = figlib.process(open("MANUSCRIPT_v2.md", encoding="utf-8").read())[0]
+from tabmap import fixref
+md = fixref(figlib.process(open("MANUSCRIPT_v2.md", encoding="utf-8").read())[0])
 tables_md = open("results/paper_tables.md", encoding="utf-8").read()
 doc = Document()
 for s in doc.sections: s.left_margin = s.right_margin = Cm(2.2); s.top_margin = s.bottom_margin = Cm(2.2)

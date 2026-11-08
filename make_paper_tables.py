@@ -151,7 +151,7 @@ def build(root):
                  "macro-F1 [95% CI]": ci(sh["macro_f1"]["estimate"], sh["macro_f1"]["ci_low"], sh["macro_f1"]["ci_high"])}]
         rows += [{"model": n, "accuracy [95% CI]": f"{a:.4f} (CI n/a)", "macro-F1 [95% CI]": f"{f:.4f} (CI n/a)"} for n, a, f in SHAH]
         add("Table 7. MURA body-part classification: held-out = MURA validation set", pd.DataFrame(rows),
-            "Shah et al. 2026 (Table 8; verified in the full text): same MURA validation set (3,197 images), fixed seed 42, image-level evaluation; no CI is shown for these body-part numbers.")
+            "Shah et al. 2026 (results table in their paper; verified in the full text): same MURA validation set (3,197 images), fixed seed 42, image-level evaluation; no CI is shown for these body-part numbers.")
     else:
         skipped.append("results_mura/shah_comparison.json")
 
