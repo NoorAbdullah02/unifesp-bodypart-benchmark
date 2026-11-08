@@ -46,3 +46,10 @@ Full texts were NOT read: re-check every number in the paper's own tables before
 * **Krishnan & Padmavathi 2025:** Procedia CS vol 260, pp 101-109, RTIP2R-2024 special issue, open access; 22 UNIFESP classes; VGG16, InceptionV3, ResNet50, DenseNet121, EfficientNetB3 after Gabor filtering; best 86.94 % (EfficientNetB3). Split and metric definition not in the abstract: the PDF has to be read.
 * **Pham et al. 2021 (arXiv page):** 16,093 images, 5 groups (abdominal, adult chest, pediatric chest, spine, others); 11,263 train, 2,419 test, 1,000 external; recall 0.982 (0.977-0.988), precision 0.985, F1 0.981; accepted to the ICCV 2021 Workshop.
 * **Langer et al. 2024 (arXiv page):** 48,434 radiographs, 14 regions; 96.6 % (single) / 97.7 % (ensemble); 35 % wrong labels and 11 % out-of-domain among test errors; corrected 98.0 / 98.8 %; preprint, no journal.
+
+## Fifth pass (8 Nov 2026): full texts read for the comparison table (Table 1 in the paper)
+* Pham et al. (arXiv): 16,093 images; two readers, two rounds; stratified random 0.7/0.15/0.15 split, patient level not mentioned; external test 1,000 images; 95 % bootstrap CIs; no calibration.
+* Langer et al. (arXiv): hospital PACS, 48,434 radiographs, 64/16/20 split, patients not mentioned; expert radiologist reviewed errors; no external data; no calibration.
+* Raffy et al. (arXiv): one health system (UW Health); one study = one patient; one annotator, 2.5 % reviewed by a radiologist (0.3 % study-level label errors); test cases from 27 institutions; bootstrap CIs; no calibration.
+* Fink et al. (PMC): monocentric, 13,098 studies / 23,663 radiographs; "randomized split at the patient level"; junior resident annotated, uncertain cases by consensus; no external validation; bootstrap CIs; no calibration.
+* Krishnan and Padmavathi: only the abstract page was reachable (ScienceDirect showed a CAPTCHA, not bypassed). Split not stated there; accuracy only. The earlier "1,088 GAN images / 1,686 originals" and "single-label" details could NOT be re-verified and were removed from the paper.

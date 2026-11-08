@@ -50,7 +50,7 @@ for i, (t, rows, note) in enumerate(md_tables("results/paper_tables.md")):
     open(f"{L}/tables/t{i+1:02d}_{names[i]}.tex", "w", encoding="utf-8").write(to_tex(t, rows, note, f"tab:{names[i]}"))
 # extra tables ------------------------------------------------------
 from lit_table import LIT_TITLE, LIT_HEAD, LIT_ROWS, LIT_NOTE
-W16 = [0.15, 0.19, 0.10, 0.09, 0.13, 0.12, 0.08]
+W16 = [0.13, 0.16, 0.09, 0.15, 0.13, 0.11, 0.07]
 spec16 = "@{}" + "".join(">{\\raggedright\\arraybackslash}p{%.2f\\textwidth}" % w for w in W16) + "@{}"
 body16 = "\\toprule\n" + " & ".join(r"\textbf{%s}" % esc(h) for h in LIT_HEAD) + " \\\\\n\\midrule\n"
 for r16 in LIT_ROWS: body16 += " & ".join(esc(c) for c in r16) + " \\\\\n"
